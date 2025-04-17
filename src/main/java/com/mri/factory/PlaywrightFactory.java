@@ -29,7 +29,7 @@ public class PlaywrightFactory {
     public Page initBrowser(Properties prop){
         String browserName = prop.getProperty("browser").trim();
         System.out.println("Browser name is: " + browserName);
-
+        System.out.println("Navigating to URL: " + prop.getProperty("url"));
         playwright.set(Playwright.create());
         switch (browserName.toLowerCase()){
             case "chromium":
@@ -55,6 +55,7 @@ public class PlaywrightFactory {
         browserContext.set(getBrowser().newContext());
         page.set(getBrowserContext().newPage());
         getPage().navigate(prop.getProperty("url").trim());
+        getPage().setDefaultTimeout(60000);
 
         return getPage();
     }
