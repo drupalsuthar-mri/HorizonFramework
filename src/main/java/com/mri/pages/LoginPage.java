@@ -25,4 +25,11 @@ public class LoginPage {
         page.click(signInBtn);
     }
 
+
+    public MenuName login() {
+        return new MenuName(page);
+    }
+
+
+
 }

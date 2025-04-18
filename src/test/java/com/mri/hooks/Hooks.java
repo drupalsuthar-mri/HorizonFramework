@@ -2,11 +2,13 @@ package com.mri.hooks;
 
 import com.microsoft.playwright.Page;
 import com.mri.factory.PlaywrightFactory;
+import com.mri.pages.MenuName;
 import com.mri.util.ConfigReader;
 import com.mri.util.TestContext;
 import com.mri.pages.LoginPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import org.testng.annotations.Test;
 
 import java.util.Properties;
 
@@ -18,6 +20,7 @@ public class Hooks {
     private Properties prop;
     private Page page;
     public static LoginPage loginPage;
+    public static MenuName menuName;
 
 
     public Hooks(TestContext context) {
@@ -33,6 +36,11 @@ public class Hooks {
         page = pf.initBrowser(prop);
         context.setPage(page);
         context.setLoginPage(new LoginPage(page));
+    }
+    @Test
+    public void MainMenu() {
+
+        context.setMenuName(new MenuName(page));
     }
 
     @After

@@ -1,6 +1,7 @@
 package com.mri.factory;
 
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.LoadState;
 
 import java.util.Properties;
 
@@ -55,7 +56,7 @@ public class PlaywrightFactory {
         browserContext.set(getBrowser().newContext());
         page.set(getBrowserContext().newPage());
         getPage().navigate(prop.getProperty("url").trim());
-        getPage().setDefaultTimeout(60000);
+        getPage().waitForLoadState(LoadState.DOMCONTENTLOADED);
 
         return getPage();
     }
