@@ -1,6 +1,7 @@
 package com.mri.util;
 
 import com.microsoft.playwright.Page;
+import com.mri.pages.HomePage;
 import com.mri.pages.SigninPage;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,9 +13,11 @@ import java.util.Properties;
 public class TestContext {
     private Page page;
 
+    private Properties prop;
+
     private SigninPage signinPage;
 
-    private Properties prop;
+    private HomePage homePage;
 
     public TestContext(){}
 }

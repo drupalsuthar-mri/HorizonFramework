@@ -1,10 +1,13 @@
 package com.mri.stepdefinitions;
 
+import com.mri.pages.HomePage;
 import com.mri.util.TestContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import java.util.function.BooleanSupplier;
 
 public class SignInSteps {
     private final TestContext context;
@@ -61,6 +64,24 @@ public class SignInSteps {
 
     @Then("user is redirected to the MRI home page")
     public void userIsRedirectedToTheMRIHomePage() {
-        context.getSigninPage().navigateToHomePage();
+        HomePage homePage = context.getSigninPage().navigateToHomePage();
+        context.setHomePage(homePage);
+        String homePageTitle = context.getHomePage().getHomePageTitle();
+        System.out.println("Step 8: User is redirected to the MRI home page with title: " + homePageTitle);
+    }
+
+    @When("the user opens the side menu")
+    public void theUserOpensTheSideMenu() {
+        context.getHomePage().getSideMenuHandler().clickSideMenuArrowIcon();
+        System.out.println("Scenario 2:");
+        System.out.println("Step 1:User opens the side menu");
+    }
+
+    @Then("the user navigates and captures screenshot of the side menu")
+    public void theUserNavigatesAndCapturesScreenshotOfTheSideMenu() {
+        boolean isComplete = context.getHomePage().getSideMenuHandler().captureSideMenu();
+        BooleanSupplier isCaptureSideMenuComplete = () -> isComplete;
+        context.getPage().waitForCondition(isCaptureSideMenuComplete);
+        System.out.println("Step 2: User navigates and captures screenshot of the side menu");
     }
 }

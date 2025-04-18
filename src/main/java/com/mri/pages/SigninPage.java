@@ -40,7 +40,7 @@ public class SigninPage {
     }
 
     public HomePage navigateToHomePage(){
-        page.click(menuArrowIcon);
+        page.locator(menuArrowIcon).waitFor();
         boolean isMenuArrowVisible = page.isVisible(menuArrowIcon);
         if(isMenuArrowVisible){
             System.out.println("Sign in is successful");

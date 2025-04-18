@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Horizon Framework execution" verbose="1" parallel="false">
+
+    <test name="Side Menu Test">
+        <classes>
+            <class name="com.mri.testrunner.MenuTestRunner" />
+        </classes>
+    </test>
+
+</suite>
