@@ -43,7 +43,7 @@ public class PlaywrightFactory {
                 browser.set(getPlaywright().webkit().launch(new BrowserType.LaunchOptions().setHeadless(false)));
                 break;
             case "chrome":
-                browser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel("chrome")));
+                browser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel("chrome").setSlowMo(100)));
                 break;
             case "edge":
                 browser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel(
@@ -57,6 +57,7 @@ public class PlaywrightFactory {
         page.set(getBrowserContext().newPage());
         getPage().navigate(prop.getProperty("url").trim());
         getPage().waitForLoadState(LoadState.DOMCONTENTLOADED);
+
 
         return getPage();
     }

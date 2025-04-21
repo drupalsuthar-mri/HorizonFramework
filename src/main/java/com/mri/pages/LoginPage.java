@@ -25,7 +25,7 @@ public class LoginPage {
         page.click(signInBtn);
     }
 
-    public void dologin(String email, String password) {
+    public void DoLogin(String email, String password) {
         clickOktaSignInButton();
         LoginEmail(email);
         LoginPassword(password);

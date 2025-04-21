@@ -40,6 +40,7 @@ public class Update {
         page.frameLocator(Frame).locator("button.hzn-update-cog").first().click();
     }
     public void UpdateProperty() {
+        page.locator(Frame).contentFrame().locator(InnerFrame).contentFrame().locator("#propTown input").scrollIntoViewIfNeeded();
         page.locator(Frame).contentFrame().locator(InnerFrame).contentFrame().locator("#propTown input").fill(PropertyTown);
     }
     public void ClickSaveBtn() {

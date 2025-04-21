@@ -20,7 +20,7 @@ public class UpdateStep {
     public void userIsLoggedInToTheApplication() {
         String url= context.getProp().getProperty("url").trim();
         context.getPage().navigate(url);
-        context.getLoginPage().dologin(context.getProp().getProperty("email"),
+        context.getLoginPage().DoLogin(context.getProp().getProperty("email"),
                 context.getProp().getProperty("password"));
     }
 
