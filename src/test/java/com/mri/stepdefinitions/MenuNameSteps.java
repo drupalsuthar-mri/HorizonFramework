@@ -3,13 +3,12 @@ package com.mri.stepdefinitions;
 import com.mri.pages.MenuName;
 import com.mri.util.TestContext;
 import io.cucumber.java.en.*;
-
 import java.util.List;
 
-public class LoginSteps {
+public class MenuNameSteps {
     private final TestContext context;
     // DI through constructor
-    public LoginSteps(TestContext context) {
+    public MenuNameSteps(TestContext context) {
         this.context = context;
         this.context.setMenuName(new MenuName(context.getPage()));
     }
@@ -53,13 +52,13 @@ public class LoginSteps {
     @When("User click on the menu button")
     public void userClickOnTheMenuButton() {
         System.out.println("User button");
-        context.getMenuName().clickMenuIcon();
+        context.getMenuName().ClickMenuIcon();
         System.out.println("User clicked on the menu button");
     }
 
     @Then("User should see the menu options")
     public void userShouldSeeTheMenuOptions() {
-        List<String> menuItems = context.getMenuName().getMenuItems();
+        List<String> menuItems = context.getMenuName().GetMenuItems();
         System.out.println("Menu Options:");
         for (String item : menuItems) {
             System.out.println("- " + item);

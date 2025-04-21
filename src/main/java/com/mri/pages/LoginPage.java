@@ -25,11 +25,18 @@ public class LoginPage {
         page.click(signInBtn);
     }
 
+    public void dologin(String email, String password) {
+        clickOktaSignInButton();
+        LoginEmail(email);
+        LoginPassword(password);
+        LoginButton();
+    }
 
     public MenuName login() {
         return new MenuName(page);
     }
-
-
+    public Update update() {
+        return new Update(page);
+    }
 
 }

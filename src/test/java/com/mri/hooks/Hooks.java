@@ -3,6 +3,7 @@ package com.mri.hooks;
 import com.microsoft.playwright.Page;
 import com.mri.factory.PlaywrightFactory;
 import com.mri.pages.MenuName;
+import com.mri.pages.Update;
 import com.mri.util.ConfigReader;
 import com.mri.util.TestContext;
 import com.mri.pages.LoginPage;
@@ -21,6 +22,7 @@ public class Hooks {
     private Page page;
     public static LoginPage loginPage;
     public static MenuName menuName;
+    public static Update update;
 
 
     public Hooks(TestContext context) {
@@ -39,9 +41,14 @@ public class Hooks {
     }
     @Test
     public void MainMenu() {
-
         context.setMenuName(new MenuName(page));
     }
+
+    @Test
+    public void update() {
+        context.setUpdate(new Update(page));
+    }
+
 
     @After
     public void tearDown() {
