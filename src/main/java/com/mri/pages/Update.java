@@ -10,7 +10,11 @@ public class Update {
     private final String MenuIcon = "menu-component div.mri-menu div.main-menu-arrow-icon";
     private final String Database = "menu-component  .mri-menu #menus #main-menu #menu-level-one [menu-code='DBM']";
     private final String Property = "menu-component  .mri-menu #extra-menus #menu-level-1 #menu-level-1-body  [mnopdesc='Property']";
-    private final String Frame = "iframe#hzn-tab-1";
+   // private final String Frame = "iframe#hzn-tab-1";
+    private  String getFrameSelector(int tabNumber) {
+        return "iframe#hzn-tab-" + tabNumber;
+    }
+
     private final String InnerFrame="iframe#HznFormFrame";
     private final  String PropertyInput = "input[title='Property']";
     private final String PropertyRef = "0000501";
@@ -27,24 +31,30 @@ public class Update {
     }
     public void GetProperty() {
         page.click(Property);
-        Locator element1=page.frameLocator(Frame).locator("//small[@id='hzn-form-desc']/following-sibling::span[1]");
+        Locator element1=page.frameLocator(getFrameSelector(1)).locator("//small[@id='hzn-form-desc']/following-sibling::span[1]");
         element1.waitFor(new Locator.WaitForOptions().setTimeout(0));
         String text1 = element1.innerText(); // Get text content
         System.out.println("Element text: " + text1);
     }
+    /*public void GetProperty() {
+        page.click(Property);
+        Locator element1=page.frameLocator(Frame).locator("//small[@id='hzn-form-desc']/following-sibling::span[1]");
+        element1.waitFor(new Locator.WaitForOptions().setTimeout(0));
+        String text1 = element1.innerText(); // Get text content
+        System.out.println("Element text: " + text1);
+    }*/
     public void SearchProperty() {
-        page.frameLocator(Frame).locator(PropertyInput).fill(PropertyRef);
-        page.frameLocator(Frame).locator(PropertyInput).press("Enter");
+        page.frameLocator(getFrameSelector(1)).locator(PropertyInput).fill(PropertyRef);
+        page.frameLocator(getFrameSelector(1)).locator(PropertyInput).press("Enter");
     }
     public void ClickDetailBtn() {
-        page.frameLocator(Frame).locator("button.hzn-update-cog").first().click();
+        page.frameLocator(getFrameSelector(1)).locator("button.hzn-update-cog").first().click();
     }
     public void UpdateProperty() {
-        page.locator(Frame).contentFrame().locator(InnerFrame).contentFrame().locator("#propTown input").scrollIntoViewIfNeeded();
-        page.locator(Frame).contentFrame().locator(InnerFrame).contentFrame().locator("#propTown input").fill(PropertyTown);
+        page.locator(getFrameSelector(1)).contentFrame().locator(InnerFrame).contentFrame().locator("#propTown input").scrollIntoViewIfNeeded();
+        page.locator(getFrameSelector(1)).contentFrame().locator(InnerFrame).contentFrame().locator("#propTown input").fill(PropertyTown);
     }
     public void ClickSaveBtn() {
-        page.frameLocator(Frame).frameLocator("iframe#HznFormFrame").getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("Save")).click();
+        page.frameLocator(getFrameSelector(1)).frameLocator("iframe#HznFormFrame").getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("Save")).click();
     }
-
 }

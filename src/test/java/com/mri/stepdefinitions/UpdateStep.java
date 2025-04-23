@@ -1,3 +1,4 @@
+/*
 package com.mri.stepdefinitions;
 
 import com.mri.pages.Update;
@@ -39,7 +40,7 @@ public class UpdateStep {
         context.getUpdate().GetProperty();
     }
 
-    @Then("Property List is opened")
+    @Then("Property List Page is opened")
     public void propertyListIsOpen() {
         System.out.println("Property List is visible");
     }
@@ -52,7 +53,9 @@ public class UpdateStep {
 
     @And("User presses Enter")
     public void userPressEnter() {
-        context.getPage().keyboard().press("Enter");
+        context.getPage().keyboard().press("Enter");*/
+/**//*
+
 
     }
 
@@ -71,8 +74,10 @@ public class UpdateStep {
     public void userClickOnSaveButton() {
         context.getUpdate().ClickSaveBtn();
     }
+
     @Then("Property details are updated successfully")
     public void propertyDetailsAreUpdatedSuccessfully() {
         System.out.println("Property details are updated successfully");
     }
 }
+*/

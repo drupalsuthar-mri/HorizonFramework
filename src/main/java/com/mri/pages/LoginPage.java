@@ -38,5 +38,11 @@ public class LoginPage {
     public Update update() {
         return new Update(page);
     }
+    public AddProperty addProperty() {
+        return new AddProperty(page);
+    }
+    public AddUnit addUnit() {
+        return new AddUnit(page);
+    }
 
 }
