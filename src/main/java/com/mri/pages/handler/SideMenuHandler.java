@@ -1,4 +1,4 @@
-package com.mri.pages;
+package com.mri.pages.handler;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
@@ -15,8 +15,13 @@ public class SideMenuHandler {
     private final String menuItems = "div.hzn-body #menu-level-one div[menu-code]";
     private final String closeBtn = ".hzn-dialog__header-icon-button";
     private final String levelTwoMenuTitle = ".hzn-body #menus #lvl-two-menu-title";
+    private final String levelThreeMenuTitle = "#hzn-body .mri-menu #menu-level-1 #menu-level-1-title";
     private final String userPreferencesDialog = "#hzn-prompt-modal-form-0";
-    private Locator sideMenuItems;
+    private final String subMenuLocators = "#hzn-body #menu-level-0 li[mnopcode]";
+    private final String nextSubMenuLocators = "#hzn-body .mri-menu #menu-level-1 li[mnopcode]";
+    private Locator subMenuItems ;
+    private Locator sideMenuItems ;
+    private Locator nextSubMenuItems ;
     private List<String> menuNames;
 
     Page.ScreenshotOptions screenshotOptions = new Page.ScreenshotOptions();
@@ -40,9 +45,7 @@ public class SideMenuHandler {
             }
             for (int i = 0; i < sideMenuItems.count(); i++) {
                 String sideMenuCode = sideMenuItems.nth(i).getAttribute("menu-code");
-                System.out.println("Menu Code: " + sideMenuCode);
                 String sideMenuName = menuNames.get(i);
-                System.out.println("Menu Name: " + sideMenuName);
                 if (!sideMenuCode.equals("HOMEHUB") || sideMenuName.equals("User Preferences")) {
                     sideMenuItems.nth(i).click();
                     if(sideMenuName.equals("User Preferences")) {
@@ -69,12 +72,61 @@ public class SideMenuHandler {
 
             }
             System.out.println("Side menu captured successfully");
-            System.out.println("test completed successfully");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
         return true;
+    }
+
+    public void clickOnRequiredSideMenuName(String menuCode) {
+        page.locator(sideMenuArrowIcon).click();
+        sideMenuItems = page.locator(menuItems);
+        menuNames = sideMenuItems.allInnerTexts();
+        for (int i = 0; i < sideMenuItems.count(); i++) {
+            String sideMenuCode = sideMenuItems.nth(i).getAttribute("menu-code");
+            String sideMenuName = menuNames.get(i);
+            System.out.println("Menu Code: " + sideMenuCode + " - Menu Name: " + sideMenuName);
+            if(sideMenuCode.equals(menuCode)) {
+                sideMenuItems.nth(i).click();
+                BooleanSupplier isLevelTwoMenuVisible =
+                        () -> sideMenuName.equals(page.locator(levelTwoMenuTitle).innerText());
+                page.waitForCondition(isLevelTwoMenuVisible);
+                break;
+            }
+        }
+    }
+
+    public void clickOnRequiredSubMenuName(String menuCode) {
+        subMenuItems = page.locator(subMenuLocators);
+        menuNames = subMenuItems.allInnerTexts();
+        for (int i = 0; i < subMenuItems.count(); i++) {
+            String subMenuCode = subMenuItems.nth(i).getAttribute("mnopcode");
+            String subMenuName = menuNames.get(i);
+            if(subMenuCode.equals(menuCode)) {
+                subMenuItems.nth(i).click();
+                System.out.println("Sub Menu Code: " + subMenuCode + " - Sub Menu Name: " + subMenuName);
+                BooleanSupplier isLevelThreeMenuVisible =
+                        () -> subMenuName.equals(page.locator(levelThreeMenuTitle).innerText());
+                page.waitForCondition(isLevelThreeMenuVisible);
+                break;
+            }
+        }
+    }
+
+    public void clickOnRequiredNextSubMenuName(String menuCode) {
+        nextSubMenuItems = page.locator(nextSubMenuLocators);
+        menuNames = nextSubMenuItems.allInnerTexts();
+        for (int i = 0; i < nextSubMenuItems.count(); i++) {
+            String nextSubMenuCode = nextSubMenuItems.nth(i).getAttribute("mnopcode");
+            String nextSubMenuName = menuNames.get(i);
+            System.out.println("Next Sub Menu Code: " + nextSubMenuCode + " - Next Sub Menu Name: " + nextSubMenuName);
+            if(nextSubMenuCode.equals(menuCode)) {
+                nextSubMenuItems.nth(i).click();
+                System.out.println("Next Sub Menu Code: " + nextSubMenuCode + " - Next Sub Menu Name: " + nextSubMenuName);
+                break;
+            }
+        }
     }
 
 }

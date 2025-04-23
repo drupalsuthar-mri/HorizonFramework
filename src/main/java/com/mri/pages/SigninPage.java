@@ -39,6 +39,15 @@ public class SigninPage {
         page.click(signInBtn);
     }
 
+    public void doSignIn(String emailId, String password) {
+        ClickOktaSignInBtn();
+        enterEmailInEmailField(emailId);
+        enterPasswordInPasswordField(password);
+        clickRememberMeBtn();
+        clickSignInButton();
+//        navigateToHomePage();
+    }
+
     public HomePage navigateToHomePage(){
         page.locator(menuArrowIcon).waitFor();
         boolean isMenuArrowVisible = page.isVisible(menuArrowIcon);

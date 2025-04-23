@@ -2,6 +2,7 @@ package com.mri.util;
 
 import com.microsoft.playwright.Page;
 import com.mri.pages.HomePage;
+import com.mri.pages.PropertyListPage;
 import com.mri.pages.SigninPage;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,8 @@ public class TestContext {
     private SigninPage signinPage;
 
     private HomePage homePage;
+
+    private PropertyListPage propertyListPage;
 
     public TestContext(){}
 }
