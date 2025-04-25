@@ -36,7 +36,6 @@ public class SideMenuHandler {
 
     public boolean captureSideMenu() {
         try {
-
             sideMenuItems = page.locator(menuItems);
             System.out.println("Number of Menu Items: " + sideMenuItems.count());
             menuNames = sideMenuItems.allInnerTexts();

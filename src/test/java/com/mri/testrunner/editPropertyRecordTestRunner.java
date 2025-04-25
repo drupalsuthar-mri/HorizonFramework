@@ -4,9 +4,9 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-        features = "src/test/resources/features/AddNewPropertyRecord.feature",
+        features = "src/test/resources/features/EditPropertyRecord.feature",
         glue = {"com.mri.stepdefinitions", "com.mri.hooks"},
         plugin = {"pretty"}
 )
-public class AddNewRecordTestRunner extends AbstractTestNGCucumberTests {
+public class editPropertyRecordTestRunner extends AbstractTestNGCucumberTests {
 }
