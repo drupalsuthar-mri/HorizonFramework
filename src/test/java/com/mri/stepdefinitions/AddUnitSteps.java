@@ -13,7 +13,6 @@ public class AddUnitSteps {
         this.context = context;
         this.context.setAddUnit(new AddUnit(context.getPage()));
     }
-
     @Given("HomePage is Open")
     public void homePageIsOpen() {
         System.out.println("HomePage is Open");
@@ -69,6 +68,5 @@ public class AddUnitSteps {
     public void UnitIsAddedSuccessfully() {
         System.out.println("Unit is added successfully");
     }
-
 
 }

@@ -1,6 +1,7 @@
 package com.mri.pages;
 
 import com.microsoft.playwright.FrameLocator;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 
@@ -10,7 +11,7 @@ public class AddUnit {
     private final String MenuIcon = "menu-component div.mri-menu div.main-menu-arrow-icon";
     private final String Database = "menu-component  .mri-menu #menus #main-menu #menu-level-one [menu-code='DBM']";
     private final String Unit = "menu-component  .mri-menu #extra-menus #menu-level-1 #menu-level-1-body  [entitycode='UNI']";
-    private final String  InnerFrame="iframe#HznFormFrame";
+    private final String InnerFrame="iframe#HznFormFrame";
     private final String PropertyRef = "0000501";
     private final String Floor = "Ground";
     private final String Description = "Unit Test";
@@ -105,7 +106,7 @@ public class AddUnit {
     }
     public void SearchUnit(){
         page.frameLocator(getFrameSelector(1)).locator("input[title='Unit']").press("Enter");
-        page.frameLocator(getFrameSelector(1)).locator("input[title='Unit']").fill("0000201");
+        page.frameLocator(getFrameSelector(1)).locator("input[title='Unit']").fill("00001887");
         page.frameLocator(getFrameSelector(1)).locator("input[title='Unit']").press("Enter");
     }
 
@@ -115,9 +116,19 @@ public class AddUnit {
     }
 
     public void SaveBtn(){
+        page.pause();
         page.setDefaultTimeout(60000);
         page.frameLocator(getFrameSelector(1)).getByRole(AriaRole.BUTTON,new FrameLocator.GetByRoleOptions().setName("Save").setExact(true)).click();
         page.setDefaultTimeout(120000);
+        Locator element= page.locator("(//p[@class='mri-toast-message__text']//span)[2]");
+        if(element.isVisible()){
+            System.out.println("Message is:" + element.textContent());
+        }
+    }
+
+    public void filterUnit(){
+        page.frameLocator(getFrameSelector(1)).locator("input[title='Unit']").fill("00002199");
+        page.frameLocator(getFrameSelector(1)).locator("input[title='Unit']").press("Enter");
     }
 
 }
