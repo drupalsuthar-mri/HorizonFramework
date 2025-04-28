@@ -1,8 +1,7 @@
 @Smoke
 Feature: Add Unit
     Background:
-      Given User is Login in the application
-
+      Given User is Login to the application
   Scenario: Add New Unit
     Given HomePage is Open
     And User clicks on Menu Icon

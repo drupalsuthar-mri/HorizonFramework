@@ -36,13 +36,6 @@ public class Update {
         String text1 = element1.innerText(); // Get text content
         System.out.println("Element text: " + text1);
     }
-    /*public void GetProperty() {
-        page.click(Property);
-        Locator element1=page.frameLocator(Frame).locator("//small[@id='hzn-form-desc']/following-sibling::span[1]");
-        element1.waitFor(new Locator.WaitForOptions().setTimeout(0));
-        String text1 = element1.innerText(); // Get text content
-        System.out.println("Element text: " + text1);
-    }*/
     public void SearchProperty() {
         page.frameLocator(getFrameSelector(1)).locator(PropertyInput).fill(PropertyRef);
         page.frameLocator(getFrameSelector(1)).locator(PropertyInput).press("Enter");
@@ -57,4 +50,6 @@ public class Update {
     public void ClickSaveBtn() {
         page.frameLocator(getFrameSelector(1)).frameLocator("iframe#HznFormFrame").getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("Save")).click();
     }
+
+
 }

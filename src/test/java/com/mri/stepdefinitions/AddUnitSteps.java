@@ -14,13 +14,6 @@ public class AddUnitSteps {
         this.context.setAddUnit(new AddUnit(context.getPage()));
     }
 
-    @Given("User is Login in the application")
-    public void userIsLoginInTheApplication() {
-        String url= context.getProp().getProperty("url").trim();
-        context.getPage().navigate(url);
-        context.getLoginPage().DoLogin(context.getProp().getProperty("email"),
-                context.getProp().getProperty("password"));
-    }
     @Given("HomePage is Open")
     public void homePageIsOpen() {
         System.out.println("HomePage is Open");
@@ -72,11 +65,10 @@ public class AddUnitSteps {
         context.getAddUnit().EndDate();
     }
 
-    @And("User Click on the Save Button")
+    @And("User click on the Save button")
     public void userClickOnSaveButton() {
         context.getAddUnit().ClickSaveBtn();
     }
-
     @Then("Unit is added successfully")
     public void UnitIsAddedSuccessfully() {
         System.out.println("Unit is added successfully");

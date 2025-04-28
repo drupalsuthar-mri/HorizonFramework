@@ -9,5 +9,5 @@ import io.cucumber.testng.CucumberOptions;
         plugin = {"pretty"},
         tags="@Smoke"
 )
-public class UnitRunner extends AbstractTestNGCucumberTests {
+public class AddUnitRunner extends AbstractTestNGCucumberTests {
 }

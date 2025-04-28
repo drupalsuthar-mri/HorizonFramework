@@ -1,4 +1,3 @@
-/*
 package com.mri.stepdefinitions;
 
 import com.mri.pages.Update;
@@ -17,13 +16,7 @@ public class UpdateStep {
         this.context.setUpdate(new Update(context.getPage()));
     }
 
-    @Given("User is Logged in to the application")
-    public void userIsLoggedInToTheApplication() {
-        String url= context.getProp().getProperty("url").trim();
-        context.getPage().navigate(url);
-        context.getLoginPage().DoLogin(context.getProp().getProperty("email"),
-                context.getProp().getProperty("password"));
-    }
+
 
     @Given("User clicks on the Menu Icon")
     public void userClickOnTheMenuIcon() {
@@ -53,8 +46,7 @@ public class UpdateStep {
 
     @And("User presses Enter")
     public void userPressEnter() {
-        context.getPage().keyboard().press("Enter");*/
-/**//*
+        context.getPage().keyboard().press("Enter");
 
 
     }
@@ -80,4 +72,4 @@ public class UpdateStep {
         System.out.println("Property details are updated successfully");
     }
 }
-*/
+
