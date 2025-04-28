@@ -18,7 +18,6 @@ public class AddUnitSteps {
     public void homePageIsOpen() {
         System.out.println("HomePage is Open");
     }
-
     @And("User clicks on Menu Icon")
     public void userClickOnMenuIcon() {
         context.getAddUnit().ClickMenuIcon();
@@ -27,17 +26,14 @@ public class AddUnitSteps {
     public void userClickOnTheDatabaseIcon() {
         context.getAddUnit().ClickDatabase();
     }
-
     @And("User clicks on the Unit Tab")
     public void userClickOnTheUnitTab() {
         context.getAddUnit().ClickUnit();
     }
-
     @Then("Unit List is opened")
     public void unitListIsOpened() {
         System.out.println("Unit List is opened");
     }
-
    @When("User clicks on  New button")
     public void userClickOnNewButton() {
         context.getAddUnit().ClickNewBtn();

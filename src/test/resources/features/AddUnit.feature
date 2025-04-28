@@ -1,4 +1,4 @@
-@Smoke
+
 Feature: Add Unit
     Background:
       Given User is Login to the application

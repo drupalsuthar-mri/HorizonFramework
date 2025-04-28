@@ -43,11 +43,11 @@ public class UpdateUnitSteps {
     public void userEntersTheTypeOfUnit() {
         context.getAddUnit().UnitType();
     }
+
     @And("User Enter the Asset Type of Unit")
     public void userEntersTheAssetType() {
         context.getAddUnit().AssetType();
     }
-
 
     @And("User clicks on  Save button")
     public void userClickOnSaveButton() {

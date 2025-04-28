@@ -3,7 +3,6 @@ package com.mri.pages;
 import com.microsoft.playwright.FrameLocator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import com.microsoft.playwright.options.LoadState;
 
 
 public class AddUnit {
@@ -34,12 +33,11 @@ public class AddUnit {
     }
     public void ClickUnit() {
         page.click(Unit);
-        page.pause();
-
-
     }
     public void ClickNewBtn() {
-        page.frameLocator(getFrameSelector(1)).getByRole(AriaRole.BUTTON,new FrameLocator.GetByRoleOptions().setName("New").setExact(true)).click();
+        page.setDefaultTimeout(60000);
+        page.frameLocator(getFrameSelector(1)).getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("New").setExact(true)).waitFor();
+        page.frameLocator(getFrameSelector(1)).getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("New").setExact(true)).click();
     }
 
     public void  PropertyRef()
@@ -66,16 +64,14 @@ public class AddUnit {
 
     public void StartDate() {
         page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitStartDate_CalendarButton").scrollIntoViewIfNeeded();
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitStartDate_TextBox").pressSequentially("2025/04/29");
         page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitStartDate_TextBox").press("Enter");
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitStartDate_TextBox").fill("28/04/2025");
 
     }
     public void EndDate(){
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitEndDate_TextBox").scrollIntoViewIfNeeded();
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitEndDate_TextBox").pressSequentially("2025/05/03");
         page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitEndDate_TextBox").press("Enter");
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitEndDate_TextBox").fill("1/05/2025");
     }
-
 
     public void ClickSaveBtn() {
         page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("Save")).click();
@@ -109,7 +105,7 @@ public class AddUnit {
     }
     public void SearchUnit(){
         page.frameLocator(getFrameSelector(1)).locator("input[title='Unit']").press("Enter");
-        page.frameLocator(getFrameSelector(1)).locator("input[title='Unit']").fill("00002199");
+        page.frameLocator(getFrameSelector(1)).locator("input[title='Unit']").fill("0000201");
         page.frameLocator(getFrameSelector(1)).locator("input[title='Unit']").press("Enter");
     }
 
@@ -121,7 +117,7 @@ public class AddUnit {
     public void SaveBtn(){
         page.setDefaultTimeout(60000);
         page.frameLocator(getFrameSelector(1)).getByRole(AriaRole.BUTTON,new FrameLocator.GetByRoleOptions().setName("Save").setExact(true)).click();
-        page.setDefaultTimeout(90000);
+        page.setDefaultTimeout(120000);
     }
 
 }
