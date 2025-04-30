@@ -41,7 +41,6 @@ public class AddUnit {
         Thread.sleep(4000);
         page.frameLocator(getFrameSelector(1)).getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("New").setExact(true)).waitFor();
         page.frameLocator(getFrameSelector(1)).getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("New").setExact(true)).click();
-        //page.frameLocator(getFrameSelector(1)).locator(".k-switch-track .k-switch-label-off").check();
     }
 
     public void  PropertyRef()
@@ -68,12 +67,12 @@ public class AddUnit {
 
     public void StartDate() {
         page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitStartDate_CalendarButton").scrollIntoViewIfNeeded();
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitStartDate_TextBox").pressSequentially("2025/04/29");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitStartDate_TextBox").pressSequentially("29/04/2025");
         page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitStartDate_TextBox").press("Enter");
 
     }
     public void EndDate(){
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitEndDate_TextBox").pressSequentially("2025/05/03");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitEndDate_TextBox").pressSequentially("03/05/2025");
         page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitEndDate_TextBox").press("Enter");
     }
 
