@@ -34,8 +34,8 @@ public class Hooks {
         context.setSigninPage(new SigninPage(page));
     }
 
-    @After
-    public void tearDown() {
-        page.context().browser().close();
-    }
+//    @After
+//    public void tearDown() {
+//        page.context().browser().close();
+//    }
 }

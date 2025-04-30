@@ -11,6 +11,7 @@ Feature: Add New Record in Property
     Then user is forwarded to the add page
     And user enters "<group ref>" and selects group ref in the group ref field
     And user enters "<operation ref>" and selects operation ref in the operation ref field
+    And user enters "<property ref>" in the property ref field
     And user enters "<property name>" in the property name field
     And user enters "<property town>" in the property town field
     And user enters "<property address>" in the property address field
@@ -21,5 +22,5 @@ Feature: Add New Record in Property
     And user clicks on save button
     Then a success toast message is displayed
     Examples:
-      | group ref | operation ref | property name                    | property town | property address          | property county | property postcode | property country | property region |
-      | DASGROP1  | DASCOMP1      | DAS Automation Framework testing | Bristol       | 123 Automation Avenue DAS | Avon            | BS5 9HT           | United Kingdom   | South East      |
+      | group ref | operation ref | property ref | property name                    | property town | property address          | property county | property postcode | property country | property region |
+      | DASGROP1  | DASCOMP1      | propref5     | DAS Automation Framework testing | Bristol       | 123 Automation Avenue DAS | Avon            | BS5 9HT           | United Kingdom   | South East      |

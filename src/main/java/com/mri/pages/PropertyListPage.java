@@ -51,4 +51,10 @@ public class PropertyListPage {
         innerFrameLocator = mainFrameLocator.frameLocator(innerFrame);
         return new PropertyHandler(page, mainFrameLocator, innerFrameLocator);
     }
+
+    public PropertyHandler deleteProperty() {
+        mainFrameLocator = page.frameLocator(mainFrame);
+        innerFrameLocator = mainFrameLocator.frameLocator(innerFrame);
+        return new PropertyHandler(page, mainFrameLocator, innerFrameLocator);
+    }
 }

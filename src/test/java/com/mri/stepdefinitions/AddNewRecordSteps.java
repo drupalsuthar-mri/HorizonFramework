@@ -71,67 +71,81 @@ public class AddNewRecordSteps {
     public void userEntersAndSelectsGroupRefInTheGroupRefField(String groupRef) {
         context.getPage().waitForTimeout(3000);
         propertyHandler.selectGroupRef(groupRef);
-        System.out.println("Step 6: user enters and selects group ref in the group ref field");
+        System.out.println("Step 6: user enter " +groupRef+ " and selects group ref in the group ref field ");
     }
 
     @And("user enters {string} and selects operation ref in the operation ref field")
     public void userEntersAndSelectsOperationRefInTheOperationRefField(String operationRef) {
+        context.getPage().waitForTimeout(3000);
         String selectedOperationRef = propertyHandler.selectOperationRef(operationRef);
         System.out.println("selectedOperationRef: "+selectedOperationRef);
-        System.out.println("Step 7: user enters and selects operation ref in the operation ref field");
+        System.out.println("Step 7: user enters " +operationRef+ " and selects operation ref in the operation ref field");
+    }
+
+    @And("user enters {string} in the property ref field")
+    public void userEntersInThePropertyRefField(String propertyRef) {
+        context.getPage().waitForTimeout(3000);
+        propertyHandler.enterPropertyRef(propertyRef);
+        System.out.println("Step 8: user enters " +propertyRef+ " in the property ref field");
     }
 
     @And("user enters {string} in the property name field")
     public void userEntersInThePropertyNameField(String propertyName) {
+        context.getPage().waitForTimeout(3000);
         propertyHandler.enterPropertyName(propertyName);
-        System.out.println("Step 8: user enters property name in the property name field");
+        System.out.println("Step 9: user enters" +propertyName+ " in the property name field");
     }
 
     @And("user enters {string} in the property town field")
     public void userEntersInThePropertyTownField(String propertyTown) {
+        context.getPage().waitForTimeout(3000);
         propertyHandler.enterPropertyTown(propertyTown);
-        System.out.println("Step 9: user enters property town in the property town field");
+        System.out.println("Step 10: user enters "+propertyTown+ " in the property town field");
     }
 
     @And("user enters {string} in the property address field")
     public void userEntersInThePropertyAddressField(String propertyAddress) {
+        context.getPage().waitForTimeout(3000);
         propertyHandler.enterPropertyAddress(propertyAddress);
-        System.out.println("Step 10: user enters property address in the property address field");
+        System.out.println("Step 11: user enters "+propertyAddress+ " in the property address field");
     }
 
     @And("user enters {string} in the property county field")
     public void userEntersInThePropertyCountyField(String propertyCounty) {
+        context.getPage().waitForTimeout(3000);
         propertyHandler.enterPropertyCounty(propertyCounty);
-        System.out.println("Step 11: user enters property county in the property county field");
+        System.out.println("Step 12: user enters "+propertyCounty+ " in the property county field");
     }
 
     @And("user enters {string} in the property postcode field")
     public void userEntersInThePropertyPostcodeField(String propertyPostcode) {
+        context.getPage().waitForTimeout(3000);
         propertyHandler.enterPropertyPostCode(propertyPostcode);
-        System.out.println("Step 12: user enters property postcode in the property postcode field");
+        System.out.println("Step 13: user enters "+propertyPostcode+ " in the property postcode field");
     }
 
     @And("user enters {string} in the property country field")
     public void userEntersInThePropertyCountryField(String propertyCountry) {
+        context.getPage().waitForTimeout(3000);
         propertyHandler.enterPropertyCountry(propertyCountry);
-        System.out.println("Step 13: user enters property country in the property country field");
+        System.out.println("Step 14: user enters "+propertyCountry+ " in the property country field");
     }
 
     @And("user enters {string} in the property region field")
     public void userEntersInThePropertyRegionField(String propertyRegion) {
+        context.getPage().waitForTimeout(3000);
         propertyHandler.enterPropertyRegion(propertyRegion);
-        System.out.println("Step 14: user enters property region in the property region field");
+        System.out.println("Step 15: user enters "+propertyRegion+ " in the property region field");
     }
 
     @And("user clicks on save button")
     public void userClicksOnSaveButton() {
         propertyHandler.clickSaveBtn();
-        System.out.println("Step 15: user clicks on save button");
+        System.out.println("Step 16: user clicks on save button");
     }
 
     @Then("a success toast message is displayed")
     public void aSuccessToastMessageIsDisplayed() {
-        System.out.println("Step 16: a success toast message is displayed");
+        System.out.println("Step 17: a success toast message is displayed");
     }
-
 }

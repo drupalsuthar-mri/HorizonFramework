@@ -4,6 +4,7 @@ import com.microsoft.playwright.FrameLocator;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
+import java.util.List;
 import java.util.function.BooleanSupplier;
 
 
@@ -15,7 +16,7 @@ public class PropertyHandler {
     private final String operationRef = "input#propCompRef_TextBox";
     private final String siteRef = "input#propHprpRef_TextBox";
     private final String parentPropRef = "input#propParentRef_TextBox";
-    private final String propertyRef = "input#propRef_TextBox";
+    private final String propertyRef = "#propRef_TextBox";
     private final String groupName = "input#dPropGropName_TextBox";
     private final String operationName = "input#dPropCompName_TextBox";
     private final String siteName = "input#dPropHprpName_TextBox";
@@ -44,17 +45,22 @@ public class PropertyHandler {
     private final String initialBookCost = "input#propBookCost_TextBox";
     private final String comment = "textarea#propComment_TextBox";
     private final String saveBtn = "button[alt='Save Button']";
+    private final String deleteBtn = "button[data-action='Delete']";
+    private final String cancelBtn = "button[data-action='Cancel']";
+    private final String refreshBtn = "button[data-action='Refresh']";
 
 //    For toast message
     private final String toastPrimaryMessage = ".mri-toast-message__primary-message";
     private final String toastSecondaryMessage = ".mri-toast-message__secondary-message";
 
 //    Filters on the property List page
-    private final String allSearchByFilters = "th[data-title]";
     private final String allSearchByFiltersInputFields = "input[title]";
 
 //    View / update selector for the property
     private final String propertyListCogIconLocator = "table.k-selectable tr button.hzn-update-cog";
+
+//    Property List fields
+    private final String propertyList = "tr[role='row']";
 
 //    Page frame locators
     private final FrameLocator mainFrameLocator;
@@ -81,6 +87,20 @@ public class PropertyHandler {
                 allSearchByFiltersInputFieldsLoc.nth(i).click();
                 allSearchByFiltersInputFieldsLoc.nth(i).fill(requiredFilterValue);
                 allSearchByFiltersInputFieldsLoc.nth(i).press("Enter");
+                break;
+            }
+        }
+    }
+
+    public void selectPropertyFromList(String requiredProperty){
+        page.waitForTimeout(2000);
+        Locator propertyListLoc = mainFrameLocator.locator(propertyList);
+        System.out.println("Property List count is:" +propertyListLoc.count());
+        List<String> propertyListData =
+                mainFrameLocator.locator("td a.mri-link").allInnerTexts();
+        for(int i =0; i < propertyListLoc.count(); i++) {
+            if(propertyListData.get(i).contentEquals(requiredProperty)){
+                propertyListLoc.nth(i).click();
                 break;
             }
         }
@@ -128,6 +148,15 @@ public class PropertyHandler {
         } else {
             System.out.println("Parent Prop Ref is null");
         }
+    }
+
+    public void enterPropertyRef(String givenPropertyRef) {
+        Locator propertyRefLoc = innerFrameLocator.locator(propertyRef);
+        propertyRefLoc.click();
+        page.waitForTimeout(2000);
+        propertyRefLoc.pressSequentially(givenPropertyRef);
+        System.out.println("Entered property reference: " + givenPropertyRef);
+        propertyRefLoc.press("Enter");
     }
 
     public void assertPropertyReference(String givenPropertyReference){
@@ -342,11 +371,13 @@ public class PropertyHandler {
         commentLoc.pressSequentially(givenComment);
         commentLoc.press("Enter");
     }
-
     public void clickSaveBtn() {
         innerFrameLocator.locator(saveBtn).click();
         System.out.println("Save button clicked");
-        if(page.locator("h1#hzn-prompt-modal-0-title").isVisible()){
+        page.waitForTimeout(2000);
+        BooleanSupplier isModalPopUpVisible = () -> page.locator("h1#hzn-prompt-modal-0-title").isVisible();
+        page.waitForCondition(isModalPopUpVisible);
+        if(isModalPopUpVisible.getAsBoolean()){
             page.locator("button[name='No']").click();
         }
         String primaryMessage = page.locator(toastPrimaryMessage).textContent();
@@ -362,4 +393,60 @@ public class PropertyHandler {
 
     }
 
+    public void clickSaveBtnOnListPage(){
+        mainFrameLocator.locator(saveBtn).click();
+        System.out.println("Save button clicked");
+        String primaryMessage = page.locator(toastPrimaryMessage).textContent();
+        String secondaryMessage = page.locator(toastSecondaryMessage).textContent();
+        if (primaryMessage.contains("Success") && secondaryMessage.contains("Transaction Successfully Saved")) {
+            System.out.println("Record Created Successfully");
+        } else if (primaryMessage.contains("Success") && secondaryMessage.contains("No changes to save.")){
+            System.out.println("No changes to save");
+        }else {
+            System.out.println("Record Creation Failed");
+        }
+    }
+
+    public void clickDeleteBtn(){
+        mainFrameLocator.locator(deleteBtn).click();
+        System.out.println("Delete button clicked");
+    }
+
+    public void clickCancelBtn(){
+        mainFrameLocator.locator(cancelBtn).click();
+        System.out.println("Cancel button clicked");
+    }
+
+    public void verifyPropertyDeleted(String propertyRef) {
+        System.out.println("Verifying property " + propertyRef + " has been deleted...");
+
+        // click on refresh button
+        mainFrameLocator.locator(refreshBtn).click();
+        System.out.println("Refreshing the property list...");
+        Locator propertyListLoc = mainFrameLocator.locator(propertyList);
+
+        // Check if property exists in the list
+        boolean propertyFound = false;
+
+        if (propertyListLoc.count() > 1) {
+            System.out.println("Total properties in the list: " + propertyListLoc.count());
+            for (int i = 0; i < propertyListLoc.count(); i++) {
+                String propertyListData = propertyListLoc.nth(i).locator("a.mri-link").innerText();
+                if (propertyListData.contentEquals(propertyRef)) {
+                    propertyFound = true;
+                    break;
+                }
+            }
+        } else {
+            System.out.println("No properties found in the list.");
+            return;
+        }
+
+        if (!propertyFound) {
+            System.out.println("Property " + propertyRef + " has been successfully deleted and is no longer visible in the list.");
+        } else {
+            System.out.println("ERROR: Property " + propertyRef + " is still visible in the list after deletion.");
+            throw new AssertionError("Property " + propertyRef + " was not deleted successfully");
+        }
+    }
 }
