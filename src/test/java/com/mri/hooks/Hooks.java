@@ -57,6 +57,10 @@ public class Hooks {
     public void addUnit() {
         context.setAddUnit(new AddUnit(page));
     }
+    @Test
+    public void accounting() {
+        context.setAccounting(new Accounting(page));
+    }
 
     @After
     public void tearDown() {

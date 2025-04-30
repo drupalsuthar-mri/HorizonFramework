@@ -46,11 +46,9 @@ public class AddProperty {
         page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator("#propCompRef_TextBox").scrollIntoViewIfNeeded();
         page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator("#propCompRef_TextBox").pressSequentially(OperationRef);
         page.setDefaultTimeout(6000);
-       page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator("#propCompRef_TextBox").press("Enter");
-
+        page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator("#propCompRef_TextBox").press("Enter");
     }
-
     public void ClickSaveBtn() {
-        page.frameLocator(MainFrame(1)).frameLocator("iframe#HznFormFrame").getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("Save")).click();
+        page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("Save")).click();
     }
 }

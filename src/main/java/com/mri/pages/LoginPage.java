@@ -44,5 +44,7 @@ public class LoginPage {
     public AddUnit addUnit() {
         return new AddUnit(page);
     }
-
+    public Accounting accounting() {
+        return new Accounting(page);
+    }
 }

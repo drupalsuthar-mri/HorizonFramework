@@ -4,6 +4,7 @@ import com.microsoft.playwright.FrameLocator;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import lombok.SneakyThrows;
 
 
 public class AddUnit {
@@ -35,10 +36,12 @@ public class AddUnit {
     public void ClickUnit() {
         page.click(Unit);
     }
-    public void ClickNewBtn() {
-        page.setDefaultTimeout(60000);
+    @SneakyThrows
+    public void ClickNewBtn(){
+        Thread.sleep(4000);
         page.frameLocator(getFrameSelector(1)).getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("New").setExact(true)).waitFor();
         page.frameLocator(getFrameSelector(1)).getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("New").setExact(true)).click();
+        //page.frameLocator(getFrameSelector(1)).locator(".k-switch-track .k-switch-label-off").check();
     }
 
     public void  PropertyRef()
