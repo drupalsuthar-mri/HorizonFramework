@@ -2,6 +2,7 @@ package com.mri.factory;
 
 import com.microsoft.playwright.*;
 
+import java.util.Collections;
 import java.util.Properties;
 
 public class PlaywrightFactory {
@@ -42,7 +43,7 @@ public class PlaywrightFactory {
                 browser.set(getPlaywright().webkit().launch(new BrowserType.LaunchOptions().setHeadless(false)));
                 break;
             case "chrome":
-                browser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel("chrome")));
+                browser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setArgs(Collections.singletonList("--start-maximized")).setChannel("chrome")));
                 break;
             case "edge":
                 browser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel(
@@ -51,11 +52,12 @@ public class PlaywrightFactory {
             default:
                 System.out.println("Please pass the correct browser name: " + browserName);
         }
-
-        browserContext.set(getBrowser().newContext());
+        browserContext.set(getBrowser().newContext(
+                new Browser.NewContextOptions().setViewportSize(null)
+        ));
+        //browserContext.set(getBrowser().newContext());
         page.set(getBrowserContext().newPage());
         getPage().navigate(prop.getProperty("url").trim());
-
         return getPage();
     }
-}
+}/**/

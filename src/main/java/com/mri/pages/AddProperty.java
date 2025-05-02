@@ -11,8 +11,8 @@ public class AddProperty {
     private final String DatabaseTab = "menu-component  .mri-menu #menus #main-menu #menu-level-one [menu-code='DBM']";
     private final String PropertyTab = "menu-component  .mri-menu #extra-menus #menu-level-1 #menu-level-1-body  [mnopdesc='Property']";
     private final String InnerFrame="iframe#HznFormFrame";
-    private final String GroupRef = "KMGROP01";
-    private final String OperationRef="KMCOMP01";
+    private final String GroupRef = "#propGropRef_TextBox";
+    private final String OperationRef="#propCompRef_TextBox";
     private final String PropertyRef = "0000501";
     private  String MainFrame(int tabNumber) {
         return "iframe#hzn-tab-" + tabNumber;
@@ -38,15 +38,15 @@ public class AddProperty {
         page.frameLocator(MainFrame(1)).getByRole(AriaRole.BUTTON,new FrameLocator.GetByRoleOptions().setName("New").setExact(true)).click();
     }
     public void FillGroupRef() {
-        page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator("#propGropRef_TextBox").scrollIntoViewIfNeeded();
-        page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator("#propGropRef_TextBox").pressSequentially(GroupRef);
-        page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator("#propGropRef_TextBox").press("Enter");
+        page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator(GroupRef).scrollIntoViewIfNeeded();
+        page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator(GroupRef).pressSequentially("KMGROP01");
+        page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator(GroupRef).press("Enter");
     }
     public void FillOperationalRef() {
-        page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator("#propCompRef_TextBox").scrollIntoViewIfNeeded();
-        page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator("#propCompRef_TextBox").pressSequentially(OperationRef);
+        page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator(OperationRef).scrollIntoViewIfNeeded();
+        page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator(OperationRef).pressSequentially("KMCOMP01");
         page.setDefaultTimeout(6000);
-        page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator("#propCompRef_TextBox").press("Enter");
+        page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator(OperationRef).press("Enter");
     }
     public void ClickSaveBtn() {
         page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("Save")).click();

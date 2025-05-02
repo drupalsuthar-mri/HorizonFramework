@@ -9,7 +9,6 @@ import com.mri.util.ConfigReader;
 import com.mri.util.TestContext;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import org.testng.annotations.Test;
 import io.cucumber.java.Scenario;
 import com.aventstack.extentreports.ExtentTest;
 

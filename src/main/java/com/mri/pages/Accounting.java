@@ -58,7 +58,6 @@ public class Accounting {
     }
     @SneakyThrows
     public void  NextBtn()  {
-
         Thread.sleep(6000);
         page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator(".hzn-footer-container .hzn-button-bar [data-action='Next']").click();
     }
@@ -82,6 +81,7 @@ public class Accounting {
         page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator(Message).press("Enter");
     }
     public void fillLeaseRef() {
+        page.pause();
         page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator(LeaseRef).scrollIntoViewIfNeeded();
         page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator(LeaseRef).type("KMLEAS3");
         page.frameLocator(MainFrame(1)).frameLocator(InnerFrame).locator(LeaseRef).press("Enter");

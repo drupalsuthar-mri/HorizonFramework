@@ -1,7 +1,7 @@
 Feature: Update Property Details
   Background:
     Given User is Login to the application
-  Scenario:
+  Scenario:Update property
     Given User clicks on the Menu Icon
     And User clicks on the DataBase Tab
     And User clicks on the Property Tab

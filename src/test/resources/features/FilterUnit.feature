@@ -1,8 +1,8 @@
-Feature: Filter Unit
+Feature: Filter Functionality in Unit Entity
   Background:
     Given User is Login to the application
 
-    Scenario:
+    Scenario: Filter Unit reference
       Given User clicks on  Menu Icon
       And User clicks on  DataBase Tab
       And User clicks on Unit Tabs

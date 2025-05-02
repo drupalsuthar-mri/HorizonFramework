@@ -13,12 +13,15 @@ public class AddUnit {
     private final String Database = "menu-component  .mri-menu #menus #main-menu #menu-level-one [menu-code='DBM']";
     private final String Unit = "menu-component  .mri-menu #extra-menus #menu-level-1 #menu-level-1-body  [entitycode='UNI']";
     private final String InnerFrame="iframe#HznFormFrame";
-    private final String PropertyRef = "0000501";
-    private final String Floor = "Ground";
-    private final String Description = "Unit Test";
-    private final String Type = "office";
-    private final String AssetType = "Industrial";
-    private final String ZoneRef="KMZONE12";
+    private final String PropertyRef = "#unitPropRef_TextBox";
+    private final String Floor = "#unitFlorFloorCode_TextBox";
+    private final String Description = "#unitDesc_TextBox";
+    private final String AssetType = "#unitElmtType_TextBox";
+    private final String ZoneRef="#unitZoneRef_TextBox";
+    private final String StartDate="#unitStartDate_TextBox";
+    private  final String  EndDate="#unitEndDate_TextBox";
+    private  final String  UnitType="#unitTypeCode_TextBox";
+    private  final String  SearchUnit="input[title='Unit']";
     private  String getFrameSelector(int tabNumber) {
         return "iframe#hzn-tab-" + tabNumber;
     }
@@ -26,7 +29,6 @@ public class AddUnit {
     public AddUnit(Page page) {
         this.page = page;
     }
-
     public void ClickMenuIcon() {
         page.click(MenuIcon);
     }
@@ -38,42 +40,43 @@ public class AddUnit {
     }
     @SneakyThrows
     public void ClickNewBtn(){
+        page.pause();
         Thread.sleep(4000);
-        page.frameLocator(getFrameSelector(1)).getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("New").setExact(true)).waitFor();
+        //page.frameLocator(getFrameSelector(1)).getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("New").setExact(true)).waitFor();
         page.frameLocator(getFrameSelector(1)).getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("New").setExact(true)).click();
     }
 
     public void  PropertyRef()
     {
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitPropRef_TextBox").scrollIntoViewIfNeeded();
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitPropRef_TextBox").pressSequentially(PropertyRef);
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(PropertyRef).scrollIntoViewIfNeeded();
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(PropertyRef).pressSequentially("0000501");
         page.setDefaultTimeout(6000);
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitPropRef_TextBox").press("Enter");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(PropertyRef).press("Enter");
     }
 
     public void Floor()
     {
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitFlorFloorCode_TextBox").scrollIntoViewIfNeeded();
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitFlorFloorCode_TextBox").pressSequentially(Floor);
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(Floor).scrollIntoViewIfNeeded();
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(Floor).pressSequentially("Ground");
         page.setDefaultTimeout(6000);
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitFlorFloorCode_TextBox").press("Enter");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(Floor).press("Enter");
     }
 
     public void Description(){
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitDesc_TextBox").scrollIntoViewIfNeeded();
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitDesc_TextBox").pressSequentially(Description);
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitDesc_TextBox").press("Enter");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(Description).scrollIntoViewIfNeeded();
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(Description).pressSequentially("Unit Testing");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(Description).press("Enter");
     }
 
     public void StartDate() {
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitStartDate_CalendarButton").scrollIntoViewIfNeeded();
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitStartDate_TextBox").pressSequentially("29/04/2025");
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitStartDate_TextBox").press("Enter");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(StartDate).scrollIntoViewIfNeeded();
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(StartDate).pressSequentially("29/04/2025");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(StartDate).press("Enter");
 
     }
     public void EndDate(){
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitEndDate_TextBox").pressSequentially("03/05/2025");
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitEndDate_TextBox").press("Enter");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(EndDate).pressSequentially("03/05/2025");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(EndDate).press("Enter");
     }
 
     public void ClickSaveBtn() {
@@ -87,29 +90,31 @@ public class AddUnit {
     }
 
     public void UnitType(){
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitTypeCode_TextBox").scrollIntoViewIfNeeded();
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitTypeCode_TextBox").press("Enter");
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitTypeCode_TextBox").fill(Type);
+        page.pause();
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(UnitType).scrollIntoViewIfNeeded();
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(UnitType).pressSequentially("office");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(UnitType).press("Enter");
+
     }
 
     public void AssetType(){
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitElmtType_TextBox").scrollIntoViewIfNeeded();
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitElmtType_TextBox").press("Enter");
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitElmtType_TextBox").pressSequentially(AssetType);
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitElmtType_TextBox").press("Enter");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(AssetType).scrollIntoViewIfNeeded();
+       // page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(AssetType).press("Enter");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(AssetType).pressSequentially("Industrial");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(AssetType).press("Enter");
     }
 
     public void ZoneRef(){
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitZoneRef_TextBox").scrollIntoViewIfNeeded();
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitZoneRef_TextBox").press("Enter");
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitZoneRef_TextBox").pressSequentially(ZoneRef);
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator("#unitZoneRef_TextBox").press("Enter");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(ZoneRef).scrollIntoViewIfNeeded();
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(ZoneRef).press("Enter");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(ZoneRef).pressSequentially("KMZONE12");
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(ZoneRef).press("Enter");
 
     }
     public void SearchUnit(){
-        page.frameLocator(getFrameSelector(1)).locator("input[title='Unit']").press("Enter");
-        page.frameLocator(getFrameSelector(1)).locator("input[title='Unit']").fill("00001887");
-        page.frameLocator(getFrameSelector(1)).locator("input[title='Unit']").press("Enter");
+        page.frameLocator(getFrameSelector(1)).locator(SearchUnit).press("Enter");
+        page.frameLocator(getFrameSelector(1)).locator(SearchUnit).fill("00001887");
+        page.frameLocator(getFrameSelector(1)).locator(SearchUnit).press("Enter");
     }
 
     public void DeleteUnit() {
@@ -127,10 +132,9 @@ public class AddUnit {
             System.out.println("Message is:" + element.textContent());
         }
     }
-
     public void filterUnit(){
-        page.frameLocator(getFrameSelector(1)).locator("input[title='Unit']").fill("00002199");
-        page.frameLocator(getFrameSelector(1)).locator("input[title='Unit']").press("Enter");
+        page.frameLocator(getFrameSelector(1)).locator(SearchUnit).fill("00002199");
+        page.frameLocator(getFrameSelector(1)).locator(SearchUnit).press("Enter");
     }
 
 }
