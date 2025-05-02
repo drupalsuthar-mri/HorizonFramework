@@ -1,14 +1,13 @@
 package com.mri.factory;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.LoadState;
 
 import java.util.Properties;
 
 public class PlaywrightFactory {
     private static final ThreadLocal<Browser> browser = new ThreadLocal<>();
     private static final ThreadLocal<BrowserContext> browserContext = new ThreadLocal<>();
-    private static final ThreadLocal<Page> page = new ThreadLocal<>();
+    public static final ThreadLocal<Page> page = new ThreadLocal<>();
     private static final ThreadLocal<Playwright> playwright = new ThreadLocal<>();
 
     public static Playwright getPlaywright() {
@@ -30,7 +29,7 @@ public class PlaywrightFactory {
     public Page initBrowser(Properties prop){
         String browserName = prop.getProperty("browser").trim();
         System.out.println("Browser name is: " + browserName);
-        System.out.println("Navigating to URL: " + prop.getProperty("url"));
+
         playwright.set(Playwright.create());
         switch (browserName.toLowerCase()){
             case "chromium":
@@ -43,7 +42,7 @@ public class PlaywrightFactory {
                 browser.set(getPlaywright().webkit().launch(new BrowserType.LaunchOptions().setHeadless(false)));
                 break;
             case "chrome":
-                browser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel("chrome").setSlowMo(500)));
+                browser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel("chrome")));
                 break;
             case "edge":
                 browser.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel(
@@ -56,8 +55,6 @@ public class PlaywrightFactory {
         browserContext.set(getBrowser().newContext());
         page.set(getBrowserContext().newPage());
         getPage().navigate(prop.getProperty("url").trim());
-        getPage().waitForLoadState(LoadState.DOMCONTENTLOADED);
-
 
         return getPage();
     }

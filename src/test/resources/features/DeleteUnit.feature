@@ -2,7 +2,7 @@ Feature: Delete Unit Record
   Background:
     Given User is Login to the application
 
-  Scenario:
+  Scenario: Delete Unit
     Given User clicks on  Menu Icon
     And User clicks on  DataBase Tab
     And User clicks on Unit Tabs
