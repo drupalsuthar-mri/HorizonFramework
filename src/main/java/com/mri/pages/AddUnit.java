@@ -13,7 +13,7 @@ public class AddUnit {
     private final String Database = "menu-component  .mri-menu #menus #main-menu #menu-level-one [menu-code='DBM']";
     private final String Unit = "menu-component  .mri-menu #extra-menus #menu-level-1 #menu-level-1-body  [entitycode='UNI']";
     private final String InnerFrame="iframe#HznFormFrame";
-    private final String PropertyRef = "#unitPropRef_TextBox";
+    private final String PropertyRef = "#unitPropRef_TextBo";
     private final String Floor = "#unitFlorFloorCode_TextBox";
     private final String Description = "#unitDesc_TextBox";
     private final String AssetType = "#unitElmtType_TextBox";
@@ -22,6 +22,7 @@ public class AddUnit {
     private  final String  EndDate="#unitEndDate_TextBox";
     private  final String  UnitType="#unitTypeCode_TextBox";
     private  final String  SearchUnit="input[title='Unit']";
+//    private final String UnitRef="#unitRef_TextBox";
     private  String getFrameSelector(int tabNumber) {
         return "iframe#hzn-tab-" + tabNumber;
     }
@@ -40,9 +41,10 @@ public class AddUnit {
     }
     @SneakyThrows
     public void ClickNewBtn(){
-        page.pause();
         Thread.sleep(4000);
         //page.frameLocator(getFrameSelector(1)).getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("New").setExact(true)).waitFor();
+        Locator element1=page.frameLocator(getFrameSelector(1)).locator("(//td[@role='gridcell']//button)[1]");
+        element1.waitFor(new Locator.WaitForOptions().setTimeout(0));
         page.frameLocator(getFrameSelector(1)).getByRole(AriaRole.BUTTON, new FrameLocator.GetByRoleOptions().setName("New").setExact(true)).click();
     }
 
@@ -61,7 +63,13 @@ public class AddUnit {
         page.setDefaultTimeout(6000);
         page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(Floor).press("Enter");
     }
-
+  /*  public void UnitRef(){
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(UnitRef).scrollIntoViewIfNeeded();
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(UnitRef).pressSequentially("0000123");
+        page.setDefaultTimeout(6000);
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(UnitRef).press("Enter");
+    }
+*/
     public void Description(){
         page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(Description).scrollIntoViewIfNeeded();
         page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(Description).pressSequentially("Unit Testing");
@@ -70,13 +78,15 @@ public class AddUnit {
 
     public void StartDate() {
         page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(StartDate).scrollIntoViewIfNeeded();
+        page.setDefaultTimeout(6000);
         page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(StartDate).pressSequentially("29/04/2025");
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(StartDate).press("Enter");
-
+       // page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(StartDate).press("tab");
     }
     public void EndDate(){
+        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(EndDate).scrollIntoViewIfNeeded();
+        page.setDefaultTimeout(6000);
         page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(EndDate).pressSequentially("03/05/2025");
-        page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(EndDate).press("Enter");
+       // page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(EndDate).press("tab");
     }
 
     public void ClickSaveBtn() {
@@ -90,7 +100,6 @@ public class AddUnit {
     }
 
     public void UnitType(){
-        page.pause();
         page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(UnitType).scrollIntoViewIfNeeded();
         page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(UnitType).pressSequentially("office");
         page.frameLocator(getFrameSelector(1)).frameLocator(InnerFrame).locator(UnitType).press("Enter");

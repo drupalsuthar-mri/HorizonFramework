@@ -46,6 +46,10 @@ public class AddUnitSteps {
     public void userEntersTheFloorIntoTheFloorField() {
         context.getAddUnit().Floor();
     }
+    /*@And("User enters the Unit Ref into the Unit Ref field")
+    public void userEntersTheUnitRefIntoTheUnitRefField() {
+        context.getAddUnit().UnitRef();
+    }*/
     @And("User enters Description into the Description field")
     public void userClickOnAddUnitButton() {
         context.getAddUnit().Description();
@@ -68,5 +72,4 @@ public class AddUnitSteps {
     public void UnitIsAddedSuccessfully() {
         System.out.println("Unit is added successfully");
     }
-
 }

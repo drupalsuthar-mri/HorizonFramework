@@ -12,6 +12,7 @@ Feature: Add Unit
     When User clicks on  New button
     And User enters the Property Ref into the Property Ref field
     And User enters the Floor Ref into the Floor Ref field
+#    And User enters the Unit Ref into the Unit Ref field
     And User enters Description into the Description field
     And User enters the Start Date into the Start Date field
     And User enters the End Date into the End Date field

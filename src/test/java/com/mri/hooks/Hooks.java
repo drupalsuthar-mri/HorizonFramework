@@ -1,21 +1,19 @@
 package com.mri.hooks;
 
 import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
 import com.microsoft.playwright.Page;
 import com.mri.factory.PlaywrightFactory;
-import com.mri.listeners.SparkReportListener;
 import com.mri.pages.*;
 import com.mri.util.ConfigReader;
 import com.mri.util.TestContext;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import com.aventstack.extentreports.ExtentTest;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.util.Properties;
+
 
 public class Hooks {
 
@@ -29,8 +27,6 @@ public class Hooks {
     public static Update update;
     public static AddProperty addProperty;
     public static AddUnit addUnit;
-    public static ExtentReports extent;
-    public static ExtentTest test;
 
     public Hooks(TestContext context) {
         this.context = context;
@@ -45,8 +41,6 @@ public class Hooks {
             page = pf.initBrowser(prop);
             context.setPage(page);
             context.setLoginPage(new LoginPage(page));
-            extent = SparkReportListener.getReportObject();
-            test = extent.createTest(scenario.getName());
         }
 
     public void MainMenu() {
@@ -70,24 +64,15 @@ public class Hooks {
     }
 
     @After
-    public void tearDown(Scenario scenario) throws IOException {
-        if (scenario.isFailed()) {
-            // Take screenshot
-            byte[] screenshot = context.getPage().screenshot();
-
-            // Save screenshot to disk
-            String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshots/" + scenario.getName().replaceAll(" ", "_") + ".png";
-            Files.write(Paths.get(screenshotPath), screenshot);
-
-            // Attach to report
-            test.fail("Scenario Failed").addScreenCaptureFromPath(screenshotPath);
-        } else {
-            test.pass("Scenario Passed");
-        }
-
-        if (context.getPage() != null) {
-            context.getPage().close();
-            extent.flush();
-        }
+    public void tearDown(Scenario scenario)  {
+    /*    if (scenario.isFailed()) {
+            try {
+                ExtentReportListener.test.get()
+                        .fail("Scenario Failed: " + scenario.getName());
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }*/
     }
 }

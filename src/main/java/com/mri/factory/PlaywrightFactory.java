@@ -2,6 +2,10 @@ package com.mri.factory;
 
 import com.microsoft.playwright.*;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Properties;
 
@@ -25,6 +29,20 @@ public class PlaywrightFactory {
 
     public static Page getPage() {
         return page.get();
+    }
+    public static String Screenshot() {
+        String folder = "./test-output/Screenshot";
+        String fileName = System.currentTimeMillis() + ".png";
+        Path fullPath = Paths.get(System.getProperty("user.dir"), folder, fileName);
+        try {
+            Files.createDirectories(fullPath.getParent());
+            getPage().screenshot(new Page.ScreenshotOptions()
+                    .setPath(fullPath)
+                    .setFullPage(true));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return folder + "/" + fileName;
     }
 
     public Page initBrowser(Properties prop){
@@ -54,10 +72,12 @@ public class PlaywrightFactory {
         }
         browserContext.set(getBrowser().newContext(
                 new Browser.NewContextOptions().setViewportSize(null)
+                        .setRecordVideoDir(Paths.get("videos"))
+                        .setRecordVideoSize(1280, 720)
         ));
-        //browserContext.set(getBrowser().newContext());
         page.set(getBrowserContext().newPage());
         getPage().navigate(prop.getProperty("url").trim());
         return getPage();
     }
-}/**/
+
+}
