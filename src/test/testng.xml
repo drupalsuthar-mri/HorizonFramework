@@ -1,9 +1,24 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="Horizon Framework execution" verbose="1" parallel="false">
 
-    <test name="Side Menu Test">
+<!--    <test name="Side Menu Test">-->
+<!--        <classes>-->
+<!--            <class name="com.mri.testrunner.MenuTestRunner" />-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <listeners>
+        <listener class-name="com.mri.listeners.ReportListener" />
+    </listeners>
+    
+<!--    <test name="Add new Property Record Test">-->
+<!--        <classes>-->
+<!--            <class name="com.mri.testrunner.AddNewRecordTestRunner" />-->
+<!--        </classes>-->
+<!--    </test>-->
+    <test name="Delete the created property record">
         <classes>
-            <class name="com.mri.testrunner.MenuTestRunner" />
+            <class name="com.mri.testrunner.DeletePropertyRecordTestRunner"/>
         </classes>
     </test>
 

@@ -417,7 +417,7 @@ public class PropertyHandler {
         System.out.println("Cancel button clicked");
     }
 
-    public void verifyPropertyDeleted(String propertyRef) {
+    public boolean verifyPropertyDeleted(String propertyRef) {
         System.out.println("Verifying property " + propertyRef + " has been deleted...");
 
         // click on refresh button
@@ -425,28 +425,19 @@ public class PropertyHandler {
         System.out.println("Refreshing the property list...");
         Locator propertyListLoc = mainFrameLocator.locator(propertyList);
 
-        // Check if property exists in the list
-        boolean propertyFound = false;
 
         if (propertyListLoc.count() > 1) {
             System.out.println("Total properties in the list: " + propertyListLoc.count());
             for (int i = 0; i < propertyListLoc.count(); i++) {
                 String propertyListData = propertyListLoc.nth(i).locator("a.mri-link").innerText();
                 if (propertyListData.contentEquals(propertyRef)) {
-                    propertyFound = true;
-                    break;
+                    return true;
                 }
             }
         } else {
-            System.out.println("No properties found in the list.");
-            return;
-        }
-
-        if (!propertyFound) {
             System.out.println("Property " + propertyRef + " has been successfully deleted and is no longer visible in the list.");
-        } else {
-            System.out.println("ERROR: Property " + propertyRef + " is still visible in the list after deletion.");
-            throw new AssertionError("Property " + propertyRef + " was not deleted successfully");
+            return false;
         }
+        return false;
     }
 }

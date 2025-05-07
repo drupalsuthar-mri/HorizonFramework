@@ -22,5 +22,9 @@ public class TestContext {
 
     private PropertyListPage propertyListPage;
 
+    private ReportManager reportManager;
+
+    private ScreenshotUtil screenshotUtil;
+
     public TestContext(){}
 }
