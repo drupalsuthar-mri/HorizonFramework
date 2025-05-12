@@ -48,6 +48,7 @@ public class PropertyHandler {
     private final String deleteBtn = "button[data-action='Delete']";
     private final String cancelBtn = "button[data-action='Cancel']";
     private final String refreshBtn = "button[data-action='Refresh']";
+    private final String backBtn = "button[data-action='Back']";
 
 //    For toast message
     private final String toastPrimaryMessage = ".mri-toast-message__primary-message";
@@ -371,7 +372,7 @@ public class PropertyHandler {
         commentLoc.pressSequentially(givenComment);
         commentLoc.press("Enter");
     }
-    public void clickSaveBtn() {
+    public void clickSaveBtnForAdd() {
         innerFrameLocator.locator(saveBtn).click();
         System.out.println("Save button clicked");
         page.waitForTimeout(2000);
@@ -391,6 +392,19 @@ public class PropertyHandler {
             System.out.println("Record Creation Failed");
         }
 
+    }public void clickSaveBtn() {
+        innerFrameLocator.locator(saveBtn).click();
+        System.out.println("Save button clicked");
+        String primaryMessage = page.locator(toastPrimaryMessage).textContent();
+        String secondaryMessage = page.locator(toastSecondaryMessage).textContent();
+
+        if (primaryMessage.contains("Success") && secondaryMessage.contains("Transaction Successfully Saved")) {
+            System.out.println("Record Created Successfully");
+        } else if (primaryMessage.contains("Success") && secondaryMessage.contains("No changes to save.")){
+            System.out.println("No changes to save");
+        }else {
+            System.out.println("Record Creation Failed");
+        }
     }
 
     public void clickSaveBtnOnListPage(){
@@ -399,11 +413,11 @@ public class PropertyHandler {
         String primaryMessage = page.locator(toastPrimaryMessage).textContent();
         String secondaryMessage = page.locator(toastSecondaryMessage).textContent();
         if (primaryMessage.contains("Success") && secondaryMessage.contains("Transaction Successfully Saved")) {
-            System.out.println("Record Created Successfully");
+            System.out.println("Successfully saved");
         } else if (primaryMessage.contains("Success") && secondaryMessage.contains("No changes to save.")){
             System.out.println("No changes to save");
         }else {
-            System.out.println("Record Creation Failed");
+            System.out.println("Saving Failed");
         }
     }
 
@@ -421,6 +435,7 @@ public class PropertyHandler {
         System.out.println("Verifying property " + propertyRef + " has been deleted...");
 
         // click on refresh button
+        page.waitForTimeout(3000);
         mainFrameLocator.locator(refreshBtn).click();
         System.out.println("Refreshing the property list...");
         Locator propertyListLoc = mainFrameLocator.locator(propertyList);
@@ -439,5 +454,10 @@ public class PropertyHandler {
             return false;
         }
         return false;
+    }
+
+    public void navigateBackToPropertyList() {
+        mainFrameLocator.locator(backBtn).click();
+        System.out.println("Navigating back to property list...");
     }
 }

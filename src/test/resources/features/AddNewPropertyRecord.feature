@@ -3,7 +3,7 @@ Feature: Add New Record in Property
   Background:
     Given User is already Signed in
 
-  Scenario Outline: User clicks on the add new button for new property generation
+  Scenario Outline: Adding a new Property in Property entity
     Given User is on the Home page
     When user navigates to property list page
     Then user is on the property list page

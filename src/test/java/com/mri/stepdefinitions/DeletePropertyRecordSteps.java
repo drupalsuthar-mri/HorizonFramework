@@ -61,7 +61,7 @@ public class DeletePropertyRecordSteps {
     @Test
     @And("the user filters the required property {string} using Property search filter for delete feature")
     public void theUserFiltersTheRequiredPropertyUsingPropertySearchFilterForDeleteFeature(String propertyRef) {
-        propertyHandler = context.getPropertyListPage().editProperty();
+        propertyHandler = context.getPropertyListPage().deleteProperty();
         propertyHandler.allSearchByFilters("Property",propertyRef);
         System.out.println("Step 2: User filters the required property using Property search filter");
     }

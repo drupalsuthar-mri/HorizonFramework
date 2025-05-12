@@ -17,4 +17,4 @@ Feature: Edit an existing record
     Then the user can see the updated data of the property in the property details form
     Examples:
       | propertyName |
-      | DASPROP1     |
+      | PROPREF5     |

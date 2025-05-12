@@ -140,7 +140,7 @@ public class AddNewRecordSteps {
 
     @And("user clicks on save button")
     public void userClicksOnSaveButton() {
-        propertyHandler.clickSaveBtn();
+        propertyHandler.clickSaveBtnForAdd();
         System.out.println("Step 16: user clicks on save button");
     }
 

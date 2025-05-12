@@ -2,9 +2,11 @@ package com.mri.factory;
 
 import com.microsoft.playwright.*;
 import com.mri.util.ReportManager;
+import com.mri.util.ScreenRecorderForFramework;
 
 import java.awt.*;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Properties;
@@ -31,7 +33,7 @@ public class PlaywrightFactory {
         return page.get();
     }
 
-    public Page initBrowser(Properties prop) throws IOException {
+    public Page initBrowser(Properties prop) throws Exception {
         String browserName = prop.getProperty("browser").trim();
         boolean headless = Boolean.parseBoolean(prop.getProperty("headless"));
         System.out.println("Browser name is: " + browserName);
@@ -58,10 +60,12 @@ public class PlaywrightFactory {
                 System.out.println("Please pass the correct browser name: " + browserName);
         }
 
-        browserContext.set(getBrowser().newContext(new Browser.NewContextOptions().setViewportSize(null)));
+        Path videoDir = Paths.get(System.getProperty("user.dir") + "/MRIAutomationTestReports/PlaywrightRecordings/");
+        browserContext.set(getBrowser().newContext(new Browser.NewContextOptions().setViewportSize(null).setRecordVideoDir(videoDir).setRecordVideoSize(1920, 1080)));
         page.set(getBrowserContext().newPage());
         getPage().navigate(prop.getProperty("url").trim());
         ReportManager.extentReportGenerator();
+//        ScreenRecorderForFramework.startRecording();
         return getPage();
     }
 

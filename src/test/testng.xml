@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="Horizon Framework execution" verbose="1" parallel="false">
+<suite name="Horizon Framework execution" verbose="4" parallel="false">
 
 <!--    <test name="Side Menu Test">-->
 <!--        <classes>-->
@@ -10,16 +10,52 @@
     <listeners>
         <listener class-name="com.mri.listeners.ReportListener" />
     </listeners>
-    
+
+
 <!--    <test name="Add new Property Record Test">-->
 <!--        <classes>-->
 <!--            <class name="com.mri.testrunner.AddNewRecordTestRunner" />-->
 <!--        </classes>-->
 <!--    </test>-->
-    <test name="Delete the created property record">
+
+<!--        <test name="Edit property Record ">-->
+<!--            <classes>-->
+<!--                <class name="com.mri.testrunner.editPropertyRecordTestRunner"/>-->
+<!--            </classes>-->
+<!--        </test>-->
+
+<!--    <test name="Delete the created property record">-->
+<!--        <classes>-->
+<!--            <class name="com.mri.testrunner.DeletePropertyRecordTestRunner"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="False Delete the created property record">-->
+<!--        <classes>-->
+<!--            <class name="com.mri.testrunner.DeletePropertyRecordTestRunner"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <test name="CRUD Operations on property">
         <classes>
+            <class name="com.mri.testrunner.AddNewRecordTestRunner"/>
+            <class name="com.mri.testrunner.editPropertyRecordTestRunner"/>
             <class name="com.mri.testrunner.DeletePropertyRecordTestRunner"/>
         </classes>
     </test>
+    
+<!--    <test name="CRUD Operation on Property Entity in a single file">-->
+<!--        <classes>-->
+<!--            <class name="com.mri.testrunner.CRUDOnPropertyTestRunner"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+
+<!--    <test name="Capture screenshot of the side menu">-->
+<!--        <classes>-->
+<!--            <class name="com.mri.testrunner.MenuTestRunner"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
 
 </suite>

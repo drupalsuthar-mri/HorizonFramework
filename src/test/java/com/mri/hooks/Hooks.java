@@ -6,6 +6,7 @@ import com.mri.pages.SigninPage;
 import com.mri.util.*;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import org.testng.annotations.AfterSuite;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -20,18 +21,25 @@ public class Hooks {
 
 
     @Before
-    public void setup() throws IOException {
+    public void setup() throws Exception {
         PlaywrightFactory pf = new PlaywrightFactory();
         ConfigReader configReader = new ConfigReader();
         Properties prop = configReader.initConfig();
+//        ScreenRecorderForFramework.startRecording();
         context.setProp(prop);
         page = pf.initBrowser(prop);
         context.setPage(page);
         context.setSigninPage(new SigninPage(page));
 
     }
-//    @After
+
+    @After
+    public void teardown(){
+//        ScreenRecorderForFramework.stopRecording();
+    }
+
+//    @AfterSuite
 //    public void tearDown(){
-//        page.context().browser().close();
+//            page.context().browser().close();
 //    }
 }

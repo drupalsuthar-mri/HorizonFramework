@@ -1,8 +1,7 @@
 package com.mri.util;
 
 import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.reporter.AbstractReporter;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Protocol;
 import com.aventstack.extentreports.reporter.configuration.Theme;
@@ -26,7 +25,17 @@ public class ReportManager {
         if(!Files.exists(reportPath)){
             Files.createDirectories(reportPath);
         }
-        String path = reportPath + "/extentReports/html/sparkReport_" + dateTime + ".html";
+        String path = reportPath + "/extentReports/html/extentReport_" + dateTime + ".html";
+//        Extent Reports
+        ExtentSparkReporter htmlReporter = new ExtentSparkReporter(path);
+        htmlReporter.config().setReportName("MRI Horizon Automation Test Report");
+        htmlReporter.config().setDocumentTitle("MRI Horizon Automation Report");
+        htmlReporter.config().setTimelineEnabled(true);
+        htmlReporter.config().setJs("js-string");
+        htmlReporter.config().setCss("css-string");
+        htmlReporter.config().setEncoding("utf-8");
+        htmlReporter.config().setProtocol(Protocol.HTTPS);
+        htmlReporter.config().setTheme(Theme.DARK);
 
 
 //        Spark Reporter
@@ -39,33 +48,21 @@ public class ReportManager {
         sparkReporter.config().setEncoding("utf-8");
         sparkReporter.config().setProtocol(Protocol.HTTPS);
         sparkReporter.config().setTheme(Theme.DARK);
-        AbstractReporter reporter = sparkReporter.config().getReporter();
-//        Extent Reports
-        extentReports = new ExtentReports();
-        extentReports.setSystemInfo("Environment", "QA");
-        extentReports.setSystemInfo("Browser", "Chrome" );
-        extentReports.setSystemInfo("Test Engineer", "Drupal Suthar");
-        extentReports.setSystemInfo("OS", System.getProperty("os.name"));
-        extentReports.setSystemInfo("OS Version", System.getProperty("os.version"));
-        extentReports.setSystemInfo("Java Version", System.getProperty("java.version"));
-        extentReports.attachReporter(sparkReporter);
 
         if(extent == null){
             extent = new ExtentReports();
             extent.setSystemInfo("QA Name", "Drupal Suthar");
+            extent.setSystemInfo("Environment", "QA");
             extent.setSystemInfo("OS", System.getProperty("os.name"));
-            extent.setSystemInfo("OS Version", System.getProperty("os.version"));
-            extent.setSystemInfo("Java Version", System.getProperty("java.version"));
-            extent.attachReporter(sparkReporter);
-//            sparkReporter.loadXMLConfig(System.getProperty("user.dir") + "/src/test/resources/extent-config.xml");
         } else {
             if(!update) {
-                extentReports.attachReporter(sparkReporter);
+                htmlReporter.config().getReporter();
+                extent.attachReporter(htmlReporter);
                 sparkReporter.config().getReporter();
                 extent.attachReporter(sparkReporter);
                 update = true;
             }
         }
-        return extentReports;
+        return extent;
     }
 }
