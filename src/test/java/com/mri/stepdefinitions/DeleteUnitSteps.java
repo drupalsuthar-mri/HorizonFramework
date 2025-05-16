@@ -12,20 +12,15 @@ public class DeleteUnitSteps {
         this.context = context;
         this.context.setAddUnit(new AddUnit(context.getPage()));
     }
-
     @When("User enters the Unite Reference in the Unit Reference Search field")
     public void userEntersTheUnitReferenceInTheUnitReferenceSearchField() {
         context.getAddUnit().SearchUnit();
     }
-
     @Then("User clicks on delete Button")
     public void UserClickOnDeleteIcon() {
         context.getAddUnit().DeleteUnit();
     }
-    @And("User clicks on The Save button")
-    public void userClickOnTheSaveButton() {
-        context.getAddUnit().SaveBtn();
-    }
+
     @Then("The Unit should be deleted successfully")
     public void theUnitShouldBeDeletedSuccessfully() {
         System.out.println("The Unit should be deleted successfully");

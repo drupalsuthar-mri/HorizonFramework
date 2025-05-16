@@ -9,8 +9,9 @@ Scenario: Update Unit
     When User enters the Unite Reference in the Unit Reference Search field and clicks on the cog icon
     Then The Unit Detail page should be opened
     And User Enter the Zone Ref of Unit
+    And User Enter the Physical Sector of Unit
     And User Enters the type of Unit
-    And User Enter the Asset Type of Unit
+#    And User Enter the Asset Type of Unit
     And User clicks on  Save button
     Then The Unit should be updated successfully
 

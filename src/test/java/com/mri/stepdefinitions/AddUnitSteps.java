@@ -38,7 +38,7 @@ public class AddUnitSteps {
         context.getAddUnit().ClickNewBtn();
     }
 
-    @And("User enters the Property Ref into the Property Ref field")
+    @And("User enters the Property into the Property Ref field")
     public void userEntersThePropertyRefIntoThePropertyRefField() {
         context.getAddUnit().PropertyRef();
     }
@@ -46,10 +46,10 @@ public class AddUnitSteps {
     public void userEntersTheFloorIntoTheFloorField() {
         context.getAddUnit().Floor();
     }
-    /*@And("User enters the Unit Ref into the Unit Ref field")
-    public void userEntersTheUnitRefIntoTheUnitRefField() {
+    @And("User enters the Unit Ref into the Unit Ref field")
+    public void userEntersTheUnitRefIntoTheUnitRefField(){
         context.getAddUnit().UnitRef();
-    }*/
+    }
     @And("User enters Description into the Description field")
     public void userClickOnAddUnitButton() {
         context.getAddUnit().Description();

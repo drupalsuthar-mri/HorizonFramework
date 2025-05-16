@@ -18,4 +18,5 @@ public class TestContext {
     private AddProperty addProperty;
     private AddUnit addUnit;
     private  Accounting accounting;
+    private Process_Menu processMenu;
 }

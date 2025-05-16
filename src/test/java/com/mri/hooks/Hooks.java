@@ -1,7 +1,5 @@
 package com.mri.hooks;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
 import com.microsoft.playwright.Page;
 import com.mri.factory.PlaywrightFactory;
 import com.mri.pages.*;
@@ -12,6 +10,8 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
 
+
+import java.io.IOException;
 import java.util.Properties;
 
 
@@ -33,7 +33,7 @@ public class Hooks {
     }
 
         @Before
-        public void setUp(Scenario scenario) {
+        public void setUp(Scenario scenario) throws IOException {
             pf = new PlaywrightFactory();
             cr = new ConfigReader();
             prop = cr.initConfig();
@@ -63,16 +63,16 @@ public class Hooks {
         context.setAccounting(new Accounting(page));
     }
 
+    public void allMenu() {
+        context.setProcessMenu(new Process_Menu(page));
+    }
+//    @After
+//    public void tearDown(Scenario scenario)  {
+//        page.close();
+//
+//    }
     @After
-    public void tearDown(Scenario scenario)  {
-    /*    if (scenario.isFailed()) {
-            try {
-                ExtentReportListener.test.get()
-                        .fail("Scenario Failed: " + scenario.getName());
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-        }*/
+    public void tearDown(){
+        page.context().browser().close();
     }
 }

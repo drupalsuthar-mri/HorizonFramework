@@ -1,5 +1,6 @@
 package com.mri.pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 public class LoginPage {
@@ -26,6 +27,11 @@ public class LoginPage {
     }
 
     public void DoLogin(String email, String password) {
+        Locator element1=page.locator("//label[normalize-space(text())='Sign in']");
+        element1.waitFor(new Locator.WaitForOptions().setTimeout(0));
+        String text = element1.innerText();
+        System.out.println("Text: " + text);
+
         clickOktaSignInButton();
         LoginEmail(email);
         LoginPassword(password);
@@ -46,5 +52,11 @@ public class LoginPage {
     }
     public Accounting accounting() {
         return new Accounting(page);
+    }
+    public Process_Menu ProcessMenu() {
+        return new Process_Menu(page);
+    }
+    public All_Menu allMenu() {
+        return new All_Menu(page);
     }
 }

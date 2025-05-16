@@ -1,5 +1,6 @@
 package com.mri.pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 import java.util.List;
@@ -14,6 +15,8 @@ public class MenuName {
             this.page = page;
         }
         public void ClickMenuIcon() {
+            Locator element1=page.locator("menu-component div.mri-menu div.main-menu-arrow-icon");
+            element1.waitFor(new Locator.WaitForOptions().setTimeout(0));
              page.click(MenuIcon);
         }
        public List<String> GetMenuItems() {

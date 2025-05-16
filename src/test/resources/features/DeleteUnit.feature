@@ -8,5 +8,4 @@ Feature: Delete Unit Record
     And User clicks on Unit Tabs
     When User enters the Unite Reference in the Unit Reference Search field
     Then User clicks on delete Button
-    And User clicks on The Save button
     Then The Unit should be deleted successfully

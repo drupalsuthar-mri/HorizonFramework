@@ -27,17 +27,26 @@ public class UpdateUnitSteps {
     public void userClickOnUnitTabs() {
         context.getAddUnit().ClickUnit();
     }
-    @When("User enters the Unite Reference in the Unit Reference Search field and clicks on the cog icon")
-    public void userEntersTheUnitReferenceInTheUnitReferenceSearchFieldAndClickonTheCogIcon() {
-        context.getAddUnit().UpdateUnit();
-    }
+
     @Then("The Unit Detail page should be opened")
     public void theUnitDetailPageShouldBeOpened() {
         System.out.println("The Unit Detail page should be opened");
     }
+
+    @When("User enters the Unite Reference in the Unit Reference Search field and clicks on the cog icon")
+    public void userEntersTheUnitReferenceInTheUnitReferenceSearchFieldAndClickonTheCogIcon() {
+
+        context.getAddUnit().UpdateUnit();
+    }
     @And("User Enter the Zone Ref of Unit")
     public void userEntersTheZoneRef() {
+
         context.getAddUnit().ZoneRef();
+    }
+
+    @And("User Enter the Physical Sector of Unit")
+    public void userEntersTheUnitPhysicalSector() {
+        context.getAddUnit().PhysicalSector();
     }
 
     @And("User Enters the type of Unit")
@@ -45,10 +54,10 @@ public class UpdateUnitSteps {
         context.getAddUnit().UnitType();
     }
 
-    @And("User Enter the Asset Type of Unit")
+ /*   @And("User Enter the Asset Type of Unit")
     public void userEntersTheAssetType() {
         context.getAddUnit().AssetType();
-    }
+    }*/
 
     @And("User clicks on  Save button")
     public void userClickOnSaveButton() {
