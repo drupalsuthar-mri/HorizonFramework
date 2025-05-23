@@ -6,9 +6,7 @@ import com.mri.pages.SigninPage;
 import com.mri.util.*;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import org.testng.annotations.AfterSuite;
 
-import java.io.IOException;
 import java.util.Properties;
 
 public class Hooks {

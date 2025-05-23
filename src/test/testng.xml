@@ -7,9 +7,9 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-    <listeners>
-        <listener class-name="com.mri.listeners.ReportListener" />
-    </listeners>
+<!--    <listeners>-->
+<!--        <listener class-name="com.mri.listeners.ReportListener" />-->
+<!--    </listeners>-->
 
 
 <!--    <test name="Add new Property Record Test">-->
@@ -36,13 +36,13 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-    <test name="CRUD Operations on property">
-        <classes>
-            <class name="com.mri.testrunner.AddNewRecordTestRunner"/>
-            <class name="com.mri.testrunner.editPropertyRecordTestRunner"/>
-            <class name="com.mri.testrunner.DeletePropertyRecordTestRunner"/>
-        </classes>
-    </test>
+<!--    <test name="CRUD Operations on property">-->
+<!--        <classes>-->
+<!--            <class name="com.mri.testrunner.AddNewRecordTestRunner"/>-->
+<!--            <class name="com.mri.testrunner.editPropertyRecordTestRunner"/>-->
+<!--            <class name="com.mri.testrunner.DeletePropertyRecordTestRunner"/>-->
+<!--        </classes>-->
+<!--    </test>-->
     
 <!--    <test name="CRUD Operation on Property Entity in a single file">-->
 <!--        <classes>-->
@@ -56,6 +56,11 @@
 <!--            <class name="com.mri.testrunner.MenuTestRunner"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-
+    
+    <test name="Check all pages are working or not">
+        <classes>
+            <class name="com.mri.testrunner.CheckAllPagesTestRunner"/>
+        </classes>
+    </test>
 
 </suite>
