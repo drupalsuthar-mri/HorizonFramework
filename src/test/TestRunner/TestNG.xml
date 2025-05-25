@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Open Cart Test Regression PW Suite" thread-count="4" verbose="1" configfailurepolicy="continue" >
+    <listeners>
+        <listener class-name="com.mri.listeners.ExtentReportListener" />
+    </listeners>
+    <test name="Add new Unit">
+        <classes>
+            <class name="com.mri.testrunner.AddUnitRunner" />
+<!--            <class name="com.mri.testrunner.UpdateUnitRunner"/>-->
+<!--            <class name="com.mri.testrunner.DeleteUnitRunner" />-->
+<!--            <class name="com.mri.testrunner.Fail_DeleteUnit" />-->
+        </classes>
+    </test>
+    <test name="Update Unit">
+        <classes>
+            <class name="com.mri.testrunner.UpdateUnitRunner"/>
+        </classes>
+    </test>
+    <test name="Delete Unit">
+       <classes>
+           <class name="com.mri.testrunner.DeleteUnitRunner" />
+       </classes>
+    </test>
+    <test name="Fail Delete Unit">
+        <classes>
+            <class name="com.mri.testrunner.Fail_DeleteUnit" />
+        </classes>
+    </test>
+</suite>
