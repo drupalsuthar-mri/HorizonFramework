@@ -13,6 +13,7 @@ public class All_menus {
     private final String Menu2="menu-component .mri-menu #menus  #menu-level-0 #menu-level-0-body li";
     private final String SubSubMenuheader="menu-component .mri-menu #extra-menus  #menu-level-1  #menu-level-1-title";
     private final String Menu3="menu-component .mri-menu #extra-menus  #menu-level-1  #menu-level-1-body li";
+    private final String pageframe=".k-textbox";
     private final String Page = "//input[contains(@aria-label, 'Page')]";
     private final String InnerFrame = "iframe#HznFormFrame";
     private final String CloseBtn = ".fa-times .fa-times-click";
@@ -37,6 +38,7 @@ public class All_menus {
 
             page.waitForTimeout(3000);
             mainMenu.click();
+            page.waitForSelector(SubMenuHeader);
             Locator element1 = page.locator(SubMenuHeader);
             String text1 = element1.textContent(); // Get text content
             System.out.println("Menu_Header: " + text1); // Menu Name For Assertion
@@ -44,7 +46,6 @@ public class All_menus {
             int countSubMenu = page.locator(Menu2).count(); // SubMenu count
             System.out.println("SubMenu Count: " + countSubMenu);
             for(int j=0;j<countSubMenu;j++) {
-
                 Locator subMenu = page.locator(Menu2).nth(j);
                 subMenu.scrollIntoViewIfNeeded();
                 System.out.println("SubMenu: " + subMenu.textContent());
@@ -64,6 +65,7 @@ public class All_menus {
                 Page newTab1 = null;
                 try {
                     newTab1 = page.waitForPopup(() -> {
+                        page.waitForSelector(Menu2);
                         subMenu.click(); // or subSubMenu.click();
                     });
                     handleNewTab(newTab1);
@@ -76,14 +78,11 @@ public class All_menus {
                     int count = page.locator(Menu3).count(); // SubMenu count
                     System.out.println("Menu3 Count: " + count);
                     for(int k=0;k<count;k++) {
-                        System.out.println("dnsanfkdsfpdfds[fk[dskf[pdskdskf[");
-                        System.out.println("j: " + j);
                         Locator subMenu2Header = page.locator(SubSubMenuheader);
                         subMenu.scrollIntoViewIfNeeded();
                         System.out.println("SubSubMenuheader: " + subMenu2Header.textContent());
                         Locator subSubMenu = page.locator(Menu3).nth(k);
                         System.out.println("SubSubMenu: " + subSubMenu.textContent());
-                        page.waitForTimeout(3000);
                         if(count == 0){
                             continue;
                         }
@@ -106,7 +105,7 @@ public class All_menus {
 
                             // Try single frame
                             try {
-                                Locator pageNum = page.frameLocator(getFrameSelector(m)).locator(Page);
+                                Locator pageNum = page.frameLocator(getFrameSelector(m)).locator(pageframe).locator(Page);
                                 if (pageNum != null && pageNum.isVisible()) {
                                     String ariaLabel = pageNum.getAttribute("aria-label");
                                     if (ariaLabel != null) {
@@ -126,10 +125,9 @@ public class All_menus {
                                     Locator doubleframe = page.frameLocator(getFrameSelector(m)).locator(InnerFrame);
                                     int Dcount = doubleframe.count();
                                     System.out.println("Dcount: " + Dcount);
-
                                     if (Dcount > 0) {
                                         Locator doublePageLocator = page.frameLocator(getFrameSelector(m))
-                                                .frameLocator(InnerFrame).locator(Page);
+                                                .frameLocator(InnerFrame).locator(pageframe).locator(Page);
                                         if (doublePageLocator != null && doublePageLocator.isVisible()) {
                                             String doublePageAria = doublePageLocator.getAttribute("aria-label");
                                             if (doublePageAria != null) {
@@ -181,7 +179,6 @@ public class All_menus {
                         clickAllCloseButtons();
                         System.out.println(k);
                         if (k <= count) {
-                            System.out.println("count2asdsad");
                             page.click(MenuIcon);
                             mainMenu.click();
                             page.locator(Menu2).nth(j).scrollIntoViewIfNeeded();
