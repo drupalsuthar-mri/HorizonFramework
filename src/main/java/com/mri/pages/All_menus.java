@@ -2,7 +2,10 @@ package com.mri.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
+import lombok.SneakyThrows;
 
+import java.awt.*;
 import java.sql.SQLOutput;
 
 public class All_menus {
@@ -27,26 +30,33 @@ public class All_menus {
     public All_menus(Page page) {
         this.page = page;
     }
+    @SneakyThrows
     public void ClickSubMenu() {
         page.click(MenuIcon);
         int countMainMenu = page.locator(Menu1).count(); // MainMenu count
         int m = 1;
         System.out.println("MainMenu Count: " + countMainMenu);
-        for(int i=2;i<countMainMenu-2;i++) {
-            Locator mainMenu = page.locator(Menu1).nth(i);
-            System.out.println("MainMenu: " + mainMenu.innerText());
 
-            page.waitForTimeout(3000);
+        for(int i=2;i<countMainMenu-2;i++) {
+
+            Locator mainMenu = page.locator(Menu1).nth(i);
+            Thread.sleep(3000);
+            System.out.println("MainMenu: " + mainMenu.innerText());
             mainMenu.click();
-            page.waitForSelector(SubMenuHeader);
+            //page.waitForSelector(SubMenuHeader);
+
+
             Locator element1 = page.locator(SubMenuHeader);
+            Thread.sleep(3000);
             String text1 = element1.textContent(); // Get text content
             System.out.println("Menu_Header: " + text1); // Menu Name For Assertion
+
 
             int countSubMenu = page.locator(Menu2).count(); // SubMenu count
             System.out.println("SubMenu Count: " + countSubMenu);
             for(int j=0;j<countSubMenu;j++) {
                 Locator subMenu = page.locator(Menu2).nth(j);
+                Thread.sleep(3000);
                 subMenu.scrollIntoViewIfNeeded();
                 System.out.println("SubMenu: " + subMenu.textContent());
                 Locator caret = subMenu.locator(".mri-button__caret");
@@ -61,7 +71,6 @@ public class All_menus {
                     System.out.println("SubMenuHeader visibility check failed: " + e.getMessage());
                 }
                 System.out.println("SubMenuHeader visibility: " + visibleLocator);
-                page.waitForTimeout(3000);
                 Page newTab1 = null;
                 try {
                     newTab1 = page.waitForPopup(() -> {
@@ -69,17 +78,19 @@ public class All_menus {
                         subMenu.click(); // or subSubMenu.click();
                     });
                     handleNewTab(newTab1);
+                    page.click(MenuIcon);
+                    mainMenu.click();
                     continue;
                 } catch (Exception error) {
                     System.out.println("No new tab opened. Continuing with current page.");
                 }
                 if(visibleLocator){
-
                     int count = page.locator(Menu3).count(); // SubMenu count
                     System.out.println("Menu3 Count: " + count);
                     for(int k=0;k<count;k++) {
                         Locator subMenu2Header = page.locator(SubSubMenuheader);
                         subMenu.scrollIntoViewIfNeeded();
+                        Thread.sleep(3000);
                         System.out.println("SubSubMenuheader: " + subMenu2Header.textContent());
                         Locator subSubMenu = page.locator(Menu3).nth(k);
                         System.out.println("SubSubMenu: " + subSubMenu.textContent());
@@ -94,8 +105,8 @@ public class All_menus {
                             handleNewTab(newTab2);
                             page.click(MenuIcon);
                             mainMenu.click();
-                            page.locator(Menu2).nth(j).scrollIntoViewIfNeeded();
-                            page.locator(Menu2).nth(j).click();
+                            subMenu.scrollIntoViewIfNeeded();
+                            subMenu.click();
                             continue;
                         } catch (Exception error) {
                             System.out.println("No new tab opened. Continuing with current page.");
@@ -176,8 +187,8 @@ public class All_menus {
                             e.printStackTrace();
                         }
                         m++;
+                        System.out.println(m);
                         clickAllCloseButtons();
-                        System.out.println(k);
                         if (k <= count) {
                             page.click(MenuIcon);
                             mainMenu.click();
@@ -189,7 +200,6 @@ public class All_menus {
                 else {
                     try {
                         System.out.println("Start frame check...");
-
                         // Try single frame
                         try {
                             Locator pageNum = page.frameLocator(getFrameSelector(m)).locator(Page);
@@ -258,19 +268,18 @@ public class All_menus {
                                 }
                             }
                         }
-
                     } catch (Exception e) {
                         System.out.println("Unexpected top-level error: " + e.getMessage());
                         e.printStackTrace();
                     }
                     m++;
+                    System.out.println(m);
                     clickAllCloseButtons();
                     if (j < countMainMenu - 1 ) {
                         page.click(MenuIcon);
                         mainMenu.click();
                     }
                 }
-
 
             }
         }

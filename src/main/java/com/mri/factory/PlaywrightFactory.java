@@ -60,7 +60,7 @@ public class PlaywrightFactory {
                 break;
             case "chrome":
                 browser.set(getPlaywright().chromium().launch(
-                        new BrowserType.LaunchOptions().setHeadless(headless).setArgs(Collections.singletonList("--start-maximized")).setChannel("chrome").setSlowMo(2000)));
+                        new BrowserType.LaunchOptions().setHeadless(headless).setArgs(Collections.singletonList("--start-maximized")).setChannel("chrome")));
                 break;
             case "edge":
                 browser.set(getPlaywright().chromium().launch(
