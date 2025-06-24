@@ -1,12 +1,14 @@
 package com.mri.stepdefinitions;
 
+import com.microsoft.playwright.Page;
 import com.mri.pages.HomePage;
-import com.mri.pages.handler.PropertyHandler;
 import com.mri.pages.handler.SideMenuHandler;
 import com.mri.util.TestContext;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import java.util.function.BooleanSupplier;
 
 public class checkAllPagesSteps {
     private final TestContext context;
@@ -37,15 +39,23 @@ public class checkAllPagesSteps {
 
     @When("the user navigates to each side menu")
     public void theUserNavigatesToEachSideMenu() {
+        System.out.println("Step 2: User navigates to each side menu");
         sideMenuHandler = context.getHomePage().getSideMenuHandler();
         context.getPage().pause();
-        allPagesAreWorking = sideMenuHandler.checkAllPagesAreWorking();
-        System.out.println("Step 2: User navigates to each side menu");
+        BooleanSupplier allPagesAreWorking = () -> {
+            try {
+                return sideMenuHandler.checkAllPagesAreWorking();
+            } catch (Exception e) {
+                System.out.println("Exception occurred while checking pages: " + e.getMessage());
+                return false;
+            }
+        };
+        context.getPage().waitForCondition(allPagesAreWorking, new Page.WaitForConditionOptions().setTimeout(0));
     }
 
     @Then("the user verifies the pages are working or not")
     public void theUserVerifiesThePagesAreWorkingOrNot() {
-        System.out.println("allPagesAreWorking: " +allPagesAreWorking);
         System.out.println("Step 3: User verifies the pages are working or not");
+        System.out.println("allPagesAreWorking: " +allPagesAreWorking);
     }
 }
